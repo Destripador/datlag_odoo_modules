@@ -60,11 +60,11 @@ class HrLeave(models.Model):
                 'Leave request must be confirmed ("To Approve")'
                 ' in order to approve it.'))
 
-        ohrmspro_vacation_project = self.sudo().env['ir.module.module'].search(
-            [('name', '=', 'ohrmspro_vacation_project')],
+        pro_vacation_project = self.sudo().env['ir.module.module'].search(
+            [('name', '=', 'pro_vacation_project')],
             limit=1).state
 
-        if ohrmspro_vacation_project == 'installed':
+        if pro_vacation_project == 'installed':
             return self.env['hr.leave'].check_pending_task(self)
         else:
             notifi=_('<table style="background-color:#EEE;border-collapse: collapse;" width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td valign="top" align="center"> <table style="margin:0 auto;width: 570px;" width="600" cellspacing="0" cellpadding="0"> <tbody> <tr> <td> <table width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td style="padding:15px;"> <p style="font-size:20px;color:#666666;" align="center">Solicitud de ausencia</p></td></tr></tbody></table><table style="background-color:#fff;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#fff"> <tbody> <tr> <td style="padding:15px;"> <div align="center"> Hola '+ self.employee_id.name +', tu solicitud de ausencia del dia '+ str(self.date_from.date()) +' hasta '+ str(self.date_to.date()) +' ha sido revisada y aprovada por '+ current_employee.name +'. </div> <table style="margin-top:20px;" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><b>Saludos</b><br></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table class="table table-bordered"><tbody><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table></td></tr></tbody></table>')
