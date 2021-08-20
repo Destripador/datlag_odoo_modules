@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Heredado agregado a Tipo de Ausencia -->
+<record id="view_employee_form_leave_inherit" model="ir.ui.view">
+  <field name="name">hr.employee.leave.form.inherit</field>
+  <field name="model">hr.employee</field>
+  <field name="inherit_id" ref="hr.view_employee_form"/>
+  <field name="arch" type="xml">
+      <xpath expr="//button[@id='hr_presence_button']" position="attributes">
+          <attribute name="attrs">
+              {'invisible': ['|', '|', '|', ('last_activity', '=', False), ('is_absent', '=', True), ('user_id', '=', False), ('id', '=', False)]}
+          </attribute>
+      </xpath>
+      <xpath expr="//group[@name='managers']" position="inside">
+          <field name="leave_second_manager_id"/>
+      </xpath>
+      <xpath expr="//group[@name='managers']" position="attributes">
+          <attribute name="invisible">0</attribute>
+      </xpath>
+  </field>
+</record>
+
+    <record id="hr_holidays_status_validators_users" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation.users</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='holiday_type']" position="replace">
+                <field name="holiday_type" string="Mode"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="replace">
+                <field name="employee_id" attrs="{
+                        'required': [('holiday_type', '=', 'employee')],
+                        'invisible': [('holiday_type', '!=', 'employee')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='mode_company_id']" position="replace">
+                <field name="mode_company_id" attrs="{
+                        'required': [('holiday_type', '=', 'company')],
+                        'invisible': [('holiday_type', '!=', 'company')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="replace">
+                <field name="category_id" attrs="{
+                        'required': [('holiday_type', '=', 'category')],
+                        'invisible': [('holiday_type', '!=','category')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="replace">
+                <field name="department_id" attrs="{
+                        'required': [('holiday_type', '=', 'department')],
+                        'invisible': [('holiday_type', 'not in', ('employee', 'department'))]
+                        }"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_status_double_validation" model="ir.ui.view">
+        <field name="name">hr.leave.type.double.validation</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='responsible_id']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('leave_validation_type', 'in', ['no_validation', 'manager'])],
+                    'required': [('leave_validation_type', 'in', ['hr', 'both'])]}
+                </attribute>
+            </xpath>
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook attrs="{'invisible': [('leave_validation_type','!=','multi')]}">
+                    <page string="Leave validation">
+                        <field name="leave_validators" mode="tree">
+                            <tree string="Users" editable="bottom">
+                                <field name="holiday_validators"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_status_validators_leave_create" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation.create.leave</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//div[@class="oe_chatter"]' position='replace'/>
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook attrs="{'invisible': [('multi_level_validation', '=', False)]}">
+                    <page string="Validation Status">
+                        <field name="leave_approvals" mode="tree">
+                            <tree string="Users" editable="false" create="false" delete="false">
+                                <field name="validating_users"/>
+                                <field name="validation_status"/>
+                                <field name="leave_comments"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="validating_users"/>
+                                    <field name="leave_comments"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button string="Approve" name="action_approve" states="confirm" type="object" class="oe_highlight"
+                />
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="replace">
+                <button string="Refuse" name="action_refuse" states="confirm,validate,validate1" type="object"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_status_validators" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button string="Approve" name="action_approve" states="confirm" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="replace">
+                <button string="Refuse" name="action_refuse" states="confirm,validate,validate1" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="open_holidays_to_approve" model="ir.actions.server">
+        <field name="name">Approvals</field>
+        <field name="model_id" ref="model_hr_leave"/>
+        <field name="binding_model_id" ref="model_hr_leave"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = model._get_approval_requests()
+        </field>
+    </record>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            id="menu_hr_holidays_leave_approvals"
+            name="Pendientes"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="3"/>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            id="menu_open_leave_approvals"
+            name="Approval Requests"
+            parent="menu_hr_holidays_leave_approvals"
+            action="open_holidays_to_approve"
+            sequence="1"/>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            id="hr_holidays.menu_hr_holidays_approvals"
+            name="Managers"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="1"/>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            id="hr_holidays.menu_hr_holidays_dashboard"
+            name="Everyone"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="2"
+            action="hr_holidays.action_hr_holidays_dashboard"/>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager"
+            id="hr_holidays.menu_hr_holidays_configuration"
+            name="Configuration"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="5"/>
+
+            <template id="mail.message_notification_email">
+            <div>
+            <div t-if="has_button_access" itemscope="itemscope" itemtype="http://schema.org/EmailMessage">
+            <div itemprop="potentialAction" itemscope="itemscope" itemtype="http://schema.org/ViewAction">
+            <link itemprop="target" t-att-href="button_access['url']"/>
+            <link itemprop="url" t-att-href="button_access['url']"/>
+            <meta itemprop="name" t-att-content="button_access['title']"/>
+            </div>
+            </div>
+            <div t-if="has_button_access or len(actions) &gt; 0 or not is_discussion"
+            summary="o_mail_notification" style="padding: 0px; width:600px;">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 600px; margin-top: 5px;">
+            <tbody><tr>
+            <td valign="center">
+            <a t-if="has_button_access"
+                    t-att-href="button_access['url']"
+                    style="padding: 8px 12px; font-size: 12px; color: #000000; text-decoration: none !important; font-weight: 400; background-color: #fdb913; border: 0px solid #fdb913; border-radius:3px">
+                <t t-esc="button_access['title']"/>
+            </a>
+            <t t-if="actions">
+                <t t-foreach="actions" t-as="action">
+                    |
+                    <a t-att-href="action['url']" style="color: #fdb913; text-decoration:none !important;">
+                        <t t-esc="action['title']"/>
+                    </a>
+                </t>
+            </t>
+            </td>
+            <td valign="center" align="right">
+            <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
+            </td>
+            </tr><tr>
+            <td colspan="2" style="text-align:center;">
+            <hr width="100%"
+                style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0 12px 0;"/>
+            <p t-if="subtype.internal" style="background-color: #f2dede; padding: 5px; margin-bottom: 16px;">
+                <strong>Internal communication</strong>: Replying will post an internal note. Followers won't receive any email notification.
+            </p>
+            </td>
+            </tr></tbody>
+            </table>
+            </div>
+            <div t-raw="message.body"/>
+            <ul t-if="tracking_values">
+            <t t-foreach="tracking_values" t-as="tracking">
+            <li><t t-esc="tracking[0]"/>: <t t-esc="tracking[1]"/> -&gt; <t t-esc="tracking[2]"/></li>
+            </t>
+            </ul>
+            <div t-if="signature" t-raw="signature" style="font-size: 13px;"/>
+            <p style="color: #555555; margin-top:32px;">
+            Sent
+            <span t-if="company.name">
+            by
+            <a t-if="website_url" t-att-href="website_url" style="text-decoration:none; color: #fdb913;">
+            <span t-esc="company.name"/>
+            </a>
+            <span t-if="not website_url" t-esc="company.name"/>
+            </span>
+            </p>
+            </div>
+            </template>
+
+</odoo>
