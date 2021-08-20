@@ -6,7 +6,7 @@
     'summary': """Multi aprovador de ausencias""",
     'description': 'Multi aprovador de ausencias, agrega tipos de ausencia con distintos aprovadores',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Luis Angel Alvarado Hernandez',
+    'author': 'DatLag',
     'company': 'DatLag',
     'website': "https://dat-lag.com",
     'depends': ['base_setup', 'hr_holidays'],

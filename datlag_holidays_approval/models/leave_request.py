@@ -4,15 +4,6 @@ from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
 
-class User(models.AbstractModel):
-        _inherit = "hr.employee.base"
-
-        leave_second_manager_id = fields.Many2one(
-            'res.users', string='Time Off',
-            compute='_compute_leave_manager', store=True, readonly=False,
-            help='Select the user responsible for approving "Time Off" of this employee.\n'
-                 'If empty, the approval is done by an Administrator or Approver (determined in settings/users).')
-
 class HrLeave(models.Model):
     _inherit = 'hr.leave'
 

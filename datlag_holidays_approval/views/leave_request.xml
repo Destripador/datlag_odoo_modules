@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <!-- Heredado agregado a Tipo de Ausencia -->
-<record id="view_employee_form_leave_inherit" model="ir.ui.view">
-  <field name="name">hr.employee.leave.form.inherit</field>
-  <field name="model">hr.employee</field>
-  <field name="inherit_id" ref="hr.view_employee_form"/>
-  <field name="arch" type="xml">
-      <xpath expr="//button[@id='hr_presence_button']" position="attributes">
-          <attribute name="attrs">
-              {'invisible': ['|', '|', '|', ('last_activity', '=', False), ('is_absent', '=', True), ('user_id', '=', False), ('id', '=', False)]}
-          </attribute>
-      </xpath>
-      <xpath expr="//group[@name='managers']" position="inside">
-          <field name="leave_second_manager_id"/>
-      </xpath>
-      <xpath expr="//group[@name='managers']" position="attributes">
-          <attribute name="invisible">0</attribute>
-      </xpath>
-  </field>
-</record>
+
 
     <record id="hr_holidays_status_validators_users" model="ir.ui.view">
         <field name="name">hr.holidays.double.validation.users</field>
@@ -62,7 +44,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='responsible_id']" position="attributes">
                 <attribute name="attrs">
-                    {'invisible': [('leave_validation_type', 'in', ['no_validation', 'manager'])],
+                    {'invisible': [('leave_validation_type', 'in', ['no_validation', 'manager', 'multi'])],
                     'required': [('leave_validation_type', 'in', ['hr', 'both'])]}
                 </attribute>
             </xpath>
@@ -149,23 +131,25 @@
             groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
             id="menu_hr_holidays_leave_approvals"
             name="Pendientes"
-            parent="hr_holidays.menu_hr_holidays_root"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="open_holidays_to_approve"
             sequence="3"/>
 
     <menuitem
-            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
-            id="menu_open_leave_approvals"
-            name="Approval Requests"
-            parent="menu_hr_holidays_leave_approvals"
-            action="open_holidays_to_approve"
+            groups="hr_holidays.group_hr_holidays_manager"
+            id="hr_holidays.menu_open_department_leave_approve"
+            name="Time Off"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="hr_holidays.hr_leave_action_action_approve_department"
             sequence="1"/>
 
     <menuitem
             groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
-            id="hr_holidays.menu_hr_holidays_approvals"
-            name="Managers"
-            parent="hr_holidays.menu_hr_holidays_root"
-            sequence="1"/>
+            id="hr_holidays.menu_manager_approve_allocations"
+            name="Allocations"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="hr_holidays.hr_leave_allocation_action_approve_department"
+            sequence="2"/>
 
     <menuitem
             groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
