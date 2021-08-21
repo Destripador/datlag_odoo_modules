@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Multi aprovador de ausencias mexico',
+    'name': 'Multi aprovador de ausencias',
     'version': '14.1',
     'summary': """Multi aprovador de ausencias""",
     'description': 'Multi aprovador de ausencias, agrega tipos de ausencia con distintos aprovadores',
