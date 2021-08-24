@@ -1,28 +1,24 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="datlag_onlyoffice.list">
-      <field name="name">datlag_onlyoffice list</field>
-      <field name="model">datlag_onlyoffice.datlag_onlyoffice</field>
+    <record model="ir.ui.view" id="datlag_onlyoffice.list_view">
+      <field name="name">datlag_onlyoffice.inicio.view.tree</field>
+      <field name="model">datlag_onlyoffice.inicio</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="archivo"/>
         </tree>
       </field>
     </record>
--->
+
 
     <!-- actions opening views on models -->
-<!--
     <record model="ir.actions.act_window" id="datlag_onlyoffice.action_window">
-      <field name="name">datlag_onlyoffice window</field>
-      <field name="res_model">datlag_onlyoffice.datlag_onlyoffice</field>
+      <field name="name">datlag_onlyoffice_window</field>
+      <field name="res_model">datlag_onlyoffice.inicio</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
+
 
     <!-- server action to the one above -->
 <!--
@@ -41,18 +37,18 @@
 -->
 
     <!-- Top menu item -->
-<!--
     <menuitem name="datlag_onlyoffice" id="datlag_onlyoffice.menu_root"/>
--->
+
     <!-- menu categories -->
 <!--
     <menuitem name="Menu 1" id="datlag_onlyoffice.menu_1" parent="datlag_onlyoffice.menu_root"/>
+
     <menuitem name="Menu 2" id="datlag_onlyoffice.menu_2" parent="datlag_onlyoffice.menu_root"/>
 -->
     <!-- actions -->
+
+    <menuitem name="List" id="datlag_onlyoffice.menu_1_list" parent="datlag_onlyoffice.menu_root" action="datlag_onlyoffice.action_window"/>
 <!--
-    <menuitem name="List" id="datlag_onlyoffice.menu_1_list" parent="datlag_onlyoffice.menu_1"
-              action="datlag_onlyoffice.action_window"/>
     <menuitem name="Server to list" id="datlag_onlyoffice" parent="datlag_onlyoffice.menu_2"
               action="datlag_onlyoffice.action_server"/>
 -->

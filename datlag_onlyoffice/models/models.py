@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class datlag_onlyoffice(models.Model):
-#     _name = 'datlag_onlyoffice.datlag_onlyoffice'
-#     _description = 'datlag_onlyoffice.datlag_onlyoffice'
+class inicio(models.Model):
+     _name = 'datlag_onlyoffice.inicio'
+     _description = 'modelo de pruba para subida de archivos'
 
-#     name = fields.Char()
+     archivo = fields.Binary()
 #     value = fields.Integer()
 #     value2 = fields.Float(compute="_value_pc", store=True)
 #     description = fields.Text()
