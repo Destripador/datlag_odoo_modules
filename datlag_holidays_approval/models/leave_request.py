@@ -27,10 +27,23 @@ class HrLeave(models.Model):
                     current_employee = self.env['hr.employee'].search(
                                     [('user_id', '=', x[2]['validating_users'])], limit=1)
 
-                    ##logger.error("IT IS Error: " + str())
+                    notifi=_('Hola ' + current_employee.name +', el empleado '+ holiday.employee_id.name +' del departamento '+ str(holiday.employee_id.department_id.name) +' tiene una peticion de ausencia pendiente para el dia '+ str(holiday.date_from.date()) +' Hasta '+str(holiday.date_to.date())+'<br><br>Revisa esta solicitud desde este boton <br><br><a href="/web#action=155" style="color:rgb(0, 12, 24);background-color:#fdb913;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" data-original-title="" title="" aria-describedby="tooltip166299">Solicitudes pendientes</a>')
 
-                    notifi=_('<table style="background-color:#EEE;border-collapse: collapse;" width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td valign="top" align="center"> <table style="margin:0 auto;width: 570px;" width="600" cellspacing="0" cellpadding="0"> <tbody> <tr> <td> <table width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td style="padding:15px;"> <p style="font-size:20px;color:#666666;" align="center">Solicitud de ausencia<br></p></td></tr></tbody></table> <table style="background-color:#fff;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#fff"> <tbody> <tr> <td style="padding:15px;"> <div align="center"> Hola '+ current_employee.name +', el empleado '+ holiday.employee_id.name +' del departamento '+ str(holiday.employee_id.department_id.name) +' tiene una peticion de ausencia pendiente para el dia '+ str(holiday.date_from.date()) +' Hasta '+str(holiday.date_to.date())+'. <br><br>Revisa esta solicitud desde este boton <br><br><a href="/web#action=155" style="color:rgb(0, 12, 24);background-color:#fdb913;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" data-original-title="" title="" aria-describedby="tooltip166299">Solicitudes pendientes</a></div> <table style="margin-top:20px;" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><b>Saludos</b><br></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table class="table table-bordered"><tbody><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table></td></tr></tbody></table>')
-                    holiday.message_post(body=notifi, subtype_xmlid="mail.mt_comment", partner_ids=[x[2]['validating_users']])
+                    notification_ids = []
+                    notification_ids.append((0,0,{
+                        'res_partner_id': current_employee.user_id.partner_id.id,
+                        'notification_type':'inbox'}))
+
+                    current_employee.message_post(
+                        body=notifi,
+                        subtype_xmlid='mail.mt_comment',
+                        email_layout_xmlid='mail.mail_notification_light',
+                        author_id=holiday.user_id.id,
+                        message_type='notification',
+                        notification_ids=notification_ids,
+                        partner_ids=[x[2]['validating_users']]
+                        )
+
         return holidays
 
 
@@ -58,8 +71,22 @@ class HrLeave(models.Model):
         if pro_vacation_project == 'installed':
             return self.env['hr.leave'].check_pending_task(self)
         else:
-            notifi=_('<table style="background-color:#EEE;border-collapse: collapse;" width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td valign="top" align="center"> <table style="margin:0 auto;width: 570px;" width="600" cellspacing="0" cellpadding="0"> <tbody> <tr> <td> <table width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td style="padding:15px;"> <p style="font-size:20px;color:#666666;" align="center">Solicitud de ausencia</p></td></tr></tbody></table><table style="background-color:#fff;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#fff"> <tbody> <tr> <td style="padding:15px;"> <div align="center"> Hola '+ self.employee_id.name +', tu solicitud de ausencia del dia '+ str(self.date_from.date()) +' hasta '+ str(self.date_to.date()) +' ha sido revisada y aprovada por '+ current_employee.name +'. </div> <table style="margin-top:20px;" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><b>Saludos</b><br></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table class="table table-bordered"><tbody><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table></td></tr></tbody></table>')
-            self.message_post(body=notifi, subtype_xmlid="mail.mt_comment")
+            notifi=_('Hola ' + self.employee_id.name +', tu solicitud de ausencia del dia '+ str(self.date_from.date()) +' hasta '+ str(self.date_to.date()) +' ha sido revisada y aprovada por '+ current_employee.name +'. ')
+
+            notification_ids = []
+            notification_ids.append((0,0,{
+                'res_partner_id': self.user_id.partner_id.id,
+                'notification_type':'inbox'}))
+
+            self.message_post(
+                body=notifi,
+                subtype_xmlid='mail.mt_comment',
+                email_layout_xmlid='mail.mail_notification_light',
+                author_id=self.user_id.id,
+                message_type='notification',
+                notification_ids=notification_ids
+                )
+
             return self.approval_check()
 
     def approval_check(self):
@@ -94,7 +121,22 @@ class HrLeave(models.Model):
             if not user.env.context.get('leave_fast_create'):
                 user.activity_update()
                 #TODO: modificar plantilla de envio para que muestre una notificacion correcta
-                self.message_post(body=_('<p style="text-align: center;">Hola '+ user.employee_id.name +', tu ausencia pendiente para el dia '+ str(user.date_from.date()) +'&nbsp; hasta '+str(user.date_to.date())+' ha sido aprovada por todos los autorizadores.</p><p style="text-align: center;"><br></p><p style="text-align: center;">No requiere de ninguna accion.</p><p style="text-align: center;">SALUDOS.<br></p>'), subtype_xmlid="mail.mt_comment")
+                notifi=_('Hola '+ user.employee_id.name +', tu ausencia pendiente para el dia '+ str(user.date_from.date()) +'&nbsp; hasta '+str(user.date_to.date())+' ha sido aprovada por todos los autorizadores.<br><br><p style="text-align: center;">No requiere de ninguna accion.</p>')
+
+                notification_ids = []
+                notification_ids.append((0,0,{
+                    'res_partner_id': self.user_id.partner_id.id,
+                    'notification_type':'inbox'}))
+
+                self.message_post(
+                    body=notifi,
+                    subtype_xmlid='mail.mt_comment',
+                    email_layout_xmlid='mail.mail_notification_light',
+                        author_id=self.user_id.id,
+                    message_type='notification',
+                    notification_ids=notification_ids
+                    )
+
             return True
         else:
             return False

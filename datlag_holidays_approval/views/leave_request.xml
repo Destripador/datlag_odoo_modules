@@ -145,14 +145,6 @@
 
     <menuitem
             groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
-            id="hr_holidays.menu_manager_approve_allocations"
-            name="Allocations"
-            parent="hr_holidays.menu_hr_holidays_approvals"
-            action="hr_holidays.hr_leave_allocation_action_approve_department"
-            sequence="2"/>
-
-    <menuitem
-            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
             id="hr_holidays.menu_hr_holidays_dashboard"
             name="Everyone"
             parent="hr_holidays.menu_hr_holidays_root"
@@ -228,16 +220,19 @@
             </div>
             </template>
 
-
-            <record id="hr_holidays.hr_leave_view_dashboard" model="ir.ui.view">
-                <field name="name">hr.leave.view.dashboard</field>
-                <field name="model">hr.leave</field>
+            <record id="hr_holidays.hr_leave_allocation_view_form_dashboard" model="ir.ui.view">
+                <field name="name">hr.leave.view.form.dashboard</field>
+                <field name="model">hr.leave.allocation</field>
+                <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form"/>
+                <field name="mode">primary</field>
+                <field name="priority">100</field>
                 <field name="arch" type="xml">
-                    <calendar js_class="time_off_calendar" string="Time Off Request" form_view_id="%(hr_holidays.hr_leave_view_form_dashboard)d" event_open_popup="true" date_start="date_from" date_stop="date_to" mode="month" quick_add="False" show_unusual_days="True" color="holiday_status_id" hide_time="True">
-                        <field name="display_name"/>
-                        <field name="holiday_status_id" filters="1" invisible="1"/>
-                        <field name="state" invisible="1"/>
-                    </calendar>
+                    <xpath expr="//header" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <div name="button_box" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </div>
                 </field>
             </record>
 
