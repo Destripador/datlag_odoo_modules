@@ -32,14 +32,14 @@ class HrLeave(models.Model):
                     notification_ids = []
                     notification_ids.append((0,0,{
                         'res_partner_id': current_employee.user_id.partner_id.id,
-                        'notification_type':'inbox'}))
+                        'notification_type':'email'}))
 
                     current_employee.message_post(
                         body=notifi,
                         subtype_xmlid='mail.mt_comment',
                         email_layout_xmlid='mail.mail_notification_light',
-                        author_id=holiday.user_id.id,
-                        message_type='notification',
+                        author_id=self.env['res.users'].browse(1).id,
+                        message_type='email',
                         notification_ids=notification_ids,
                         partner_ids=[x[2]['validating_users']]
                         )
@@ -82,7 +82,7 @@ class HrLeave(models.Model):
                 body=notifi,
                 subtype_xmlid='mail.mt_comment',
                 email_layout_xmlid='mail.mail_notification_light',
-                author_id=self.user_id.id,
+                author_id=self.env['res.users'].browse(1).id,
                 message_type='notification',
                 notification_ids=notification_ids
                 )
@@ -132,7 +132,7 @@ class HrLeave(models.Model):
                     body=notifi,
                     subtype_xmlid='mail.mt_comment',
                     email_layout_xmlid='mail.mail_notification_light',
-                        author_id=self.user_id.id,
+                        author_id=self.env['res.users'].browse(1).id,
                     message_type='notification',
                     notification_ids=notification_ids
                     )
@@ -181,11 +181,20 @@ class HrLeave(models.Model):
                 [('holiday_status', '=', self.id),
                  ('validating_users', '=', self.env.uid)])
             validation_obj.validation_status = False
+
+            notifi = _("Hola "+holiday.employee_id.name+", Tu ausencia del dia "+ str(holiday.date_from.date()) +" hasta "+ str(holiday.date_to.date()) +" ha sido denegada, esta decicion ha sido tomada por algun autorizador, si necesitas mas informacion puedes comunicarte con tu gerente u official de tiempos en el area de recursos humanos.")
             notification_ids = []
             notification_ids.append((0,0,{
             'res_partner_id':holiday.user_id.partner_id.id,
             'notification_type':'inbox'}))
-            holiday.employee_id.message_post(body=_("Hola "+holiday.employee_id.name+", Tu ausencia del dia "+ str(holiday.date_from.date()) +" hasta "+ str(holiday.date_to.date()) +" ha sido denegada, esta decicion ha sido tomada por algun autorizador, si necesitas mas informacion puedes comunicarte con tu gerente u official de tiempos en el area de recursos humanos."), subtype_xmlid="mail.mt_comment", author_id=holiday.user_id.id,message_type='notification', notification_ids=notification_ids)
+
+            holiday.message_post(
+                body=notifi,
+                subtype_xmlid="mail.mt_comment",
+                author_id=self.env['res.users'].browse(1).id,
+                message_type='notification',
+                notification_ids=notification_ids
+                )
             return True
         else:
             for holiday in self:
