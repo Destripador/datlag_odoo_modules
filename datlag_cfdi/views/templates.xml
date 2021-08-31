@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+      <!-- add css / js -->
+              <template id="assets_backend" name="js assets" inherit_id="web.assets_backend">
+                  <xpath expr="." position="inside">
+                       <script type="text/javascript" src="/datlag_cfdi/static/src/js/custom.js"/>
+                       <link href="/datlag_cfdi/static/src/css/datlag_cfdi.css" rel="stylesheet" type="text/css"/>
+                  </xpath>
+              </template>
+    </data>
+</odoo>

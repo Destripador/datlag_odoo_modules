@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "datlag_onlyoffice",
+    'name': "datlag_cfdi",
 
     'summary': """
         Desarrollos
@@ -28,6 +28,8 @@
         'views/views.xml',
         'views/templates.xml',
     ],
+    #add qweb custom
+    'qweb': ['static/src/xml/tab.xml'],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

@@ -1,0 +1,119 @@
+<odoo>
+  <data>
+
+
+    <record model="ir.ui.view" id="datlag_cfdi.inicio_form_view">
+      <field name="name">Contribuyente</field>
+      <field name="model">datlag_cfdi.inicio</field>
+      <field name="arch" type="xml">
+        <form string="Datos del contribuyente">
+          <header>
+
+          </header>
+          <sheet>
+            <div name="button_box" class="oe_button_box">
+                <button id="validarlas" class="oe_stat_button"
+                    icon="fa-question-circle" string="Validar claves"></button>
+                <button id="descargamasiva" class="oe_stat_button"
+                        icon="fa-cloud-download" string="Descarga Masiva"></button>
+                <button id="descarg-return" class="oe_stat_button"
+                        icon="fa-cloud-download" string="Volver" style="display: none"></button>
+            </div>
+
+            <div class="descarga-data">
+             <group col="4" colspan="2" string="Datos del solicitante">
+                <group col="2" colspan="2">
+                  <field  string="RFC" name="RFC"/>
+                  <field  string="contraseña" name="FIEL_PAS"/>
+                </group>
+                <group col="2" colspan="2">
+                  <field  string="KEY" name="FIEL_KEY"/>
+                  <field  string="CER" name="FIEL_CER"/>
+                </group>
+             </group>
+           </div>
+
+
+           <div class="descarga-masiva well" style="display: none;">
+             <div class="row col-12">
+               <div class="col-12 text-top" align="center"><h3>Periodo de descarga</h3></div>
+               <div class="row col-6">
+                 <div class="col-5" align=""><p>inicio</p></div>
+                 <div class="col-7"><input type="date" id="start" name="start"/></div>
+               </div>
+               <div class="row col-6 text-top">
+                 <div class="col-5" align=""><p>final</p></div>
+                 <div class="col-7"><input type="date" id="final" name="final"/></div>
+               </div>
+               <div class="col-12 text-top">
+                 <select name="cars" id="cars">
+                  <option value="volvo">Recibidos</option>
+                  <option value="saab">Emitidos</option>
+                </select>
+               </div>
+               <div class="col-12" align="center">
+                 <button id="descarga-inicio" type="button" class="btn btn-warning"
+                         icon="fa-cloud-download" string=" Iniciar Descarga" name="csca"></button>
+               </div>
+             </div>
+           </div>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="datlag_cfdi.list_view">
+      <field name="name">datlag_cfdi.inicio.view.tree</field>
+      <field name="model">datlag_cfdi.inicio</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="RFC"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="datlag_cfdi.action_window">
+      <field name="name">Lista de Contribuyentes</field>
+      <field name="res_model">datlag_cfdi.inicio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="datlag_cfdi.action_server">
+      <field name="name">datlag_cfdi server</field>
+      <field name="model_id" ref="model_datlag_cfdi_datlag_cfdi"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <menuitem name="datlag_cfdi" id="datlag_cfdi.menu_root"/>
+
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="datlag_cfdi.menu_1" parent="datlag_cfdi.menu_root"/>
+
+    <menuitem name="Menu 2" id="datlag_cfdi.menu_2" parent="datlag_cfdi.menu_root"/>
+-->
+    <!-- actions -->
+
+    <menuitem name="List" id="datlag_cfdi.menu_1_list" parent="datlag_cfdi.menu_root" action="datlag_cfdi.action_window"/>
+<!--
+    <menuitem name="Server to list" id="datlag_cfdi" parent="datlag_cfdi.menu_2"
+              action="datlag_cfdi.action_server"/>
+-->
+  </data>
+</odoo>
