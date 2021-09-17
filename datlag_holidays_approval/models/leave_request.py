@@ -41,6 +41,7 @@ class HrLeave(models.Model):
                         email_layout_xmlid='mail.mail_notification_light',
                         author_id=self.env['res.users'].browse(1).id,
                         notification_ids=notification_ids,
+                        message_type='notification',
                         partner_ids=[current_employee.user_id.partner_id.id]
                         )
 
