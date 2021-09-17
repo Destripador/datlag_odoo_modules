@@ -12,6 +12,9 @@ import os
 import logging
 import datetime
 import time
+
+from datetime import datetime
+
 _logger = logging.getLogger(__name__)
 
 class inicio(models.Model):
@@ -34,10 +37,62 @@ class inicio(models.Model):
          except Exception as e:
              raise ValidationError("No se ha podido validar error 500.")
 
+## Agregar verificacion de fecha de inicio sea anterior a la la fecha FECHA_FINAL
+## Verificar que que no este vacio
      @api.model
      def descargamasiva(self, args):
-         _logger.error("IT IS Error: SOLICITUD::  " + str(args['start'].strptime('%Y ') ))
-         args['start'], args['end']
+         if args['start'].strip() and args['end'].strip():
+             _logger.error("IT IS Error: SOLICITUD::  ------ " + str(datetime.strptime(args['start'], '%Y-%m-%d')))
+             current_register = self.env['datlag_cfdi.inicio'].search([('id', '=', args['id'])], limit=1)
+             fiel = Fiel(base64.decodebytes(current_register.FIEL_CER),base64.decodebytes(current_register.FIEL_KEY), current_register.FIEL_PAS)
+             auth = Autenticacion(fiel)
+             token = auth.obtener_token()
+             descarga = SolicitaDescarga(fiel)
+             if args['tipo_solicitud'] == "Emisor":
+                solicitud = descarga.solicitar_descarga(token, current_register.RFC, datetime.strptime(args['start'], '%Y-%m-%d'), datetime.strptime(args['end'], '%Y-%m-%d'), rfc_emisor=current_register.RFC, tipo_solicitud='CFDI')
+             else:
+                solicitud = descarga.solicitar_descarga(token, current_register.RFC, datetime.strptime(args['start'], '%Y-%m-%d'), datetime.strptime(args['end'], '%Y-%m-%d'), rfc_receptor=current_register.RFC, tipo_solicitud='CFDI')
+             _logger.error("IT IS Error: 1 - SOLICITUD:: csacsacsacsacsssssssssssssssssss" + str(solicitud))
+             while True:
+                 token = auth.obtener_token()
+                 print('IT IS Error: TOKEN: ', token)
+                 verificacion = VerificaSolicitudDescarga(fiel)
+                 verificacion = verificacion.verificar_descarga(token, current_register.RFC, solicitud['id_solicitud'])
+
+                 _logger.error("IT IS Error: SOLICITUD::  " + str(verificacion))
+                 estado_solicitud = int(verificacion['estado_solicitud'])
+                 # 1, Aceptada
+                 # 2, En proceso
+                 # 3, Terminada
+                 # 4, Error
+                 # 5, Rechazada
+                 # 6, Vencida
+                 if estado_solicitud <= 2:
+                     # Si el estado de solicitud esta Aceptado o en proceso el programa espera
+                     # 60 segundos y vuelve a tratar de verificar
+                     time.sleep(10)
+                     continue
+                 elif estado_solicitud >= 4:
+                     _logger.error("IT IS Error: error general ")
+                     break
+                 else:
+                     if int(verificacion['numero_cfdis']) == 0:
+                         break
+                     # Si el estatus es 3 se trata de descargar los paquetes
+                     for paquete in verificacion['paquetes']:
+                         _logger.error("IT IS Error: PAQUETE: "+ str(paquete))
+                         descarga = DescargaMasiva(fiel)
+                         _logger.error("IT IS Error: DESCARGA: "+ str(descarga))
+                         descarga = descarga.descargar_paquete(token, current_register.RFC, paquete)
+                         _logger.error("IT IS Error: DESCARGA: 1111111111"+ str(descarga))
+                         return descarga
+                         #with open('{}.zip'.format(paquete), 'wb') as fp:
+                         #    return base64.b64decode(descarga['paquete_b64'])
+                     break
+
+         else:
+             _logger.error("IT IS Error: SOLICITUD::  ------ FALTA")
+
          """current_register = self.env['datlag_cfdi.inicio'].search([('id', '=', args['id'])], limit=1)
          fiel = Fiel(base64.decodebytes(current_register.FIEL_CER),base64.decodebytes(current_register.FIEL_KEY), current_register.FIEL_PAS)
          auth = Autenticacion(fiel)

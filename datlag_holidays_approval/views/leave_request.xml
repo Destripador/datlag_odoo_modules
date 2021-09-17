@@ -105,9 +105,26 @@
         <field name="model">hr.leave</field>
         <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[last()]" position="after">
-                <field name="multi_level_validation" invisible="1"/>
-            </xpath>
+          <xpath expr="//group[last()]" position="after">
+              <field name="multi_level_validation" invisible="1"/>
+              <notebook attrs="{'invisible': [('multi_level_validation', '=', False)]}">
+                  <page string="Validation Status">
+                      <field name="leave_approvals" mode="tree">
+                          <tree string="Users" editable="false" create="false" delete="false">
+                              <field name="validating_users"/>
+                              <field name="validation_status"/>
+                              <field name="leave_comments"/>
+                          </tree>
+                          <form>
+                              <group>
+                                  <field name="validating_users"/>
+                                  <field name="leave_comments"/>
+                              </group>
+                          </form>
+                      </field>
+                  </page>
+              </notebook>
+          </xpath>
             <xpath expr="//button[@name='action_approve']" position="replace">
                 <button string="Approve" name="action_approve" states="confirm" type="object" class="oe_highlight"/>
             </xpath>
@@ -125,6 +142,12 @@
         <field name="code">
             action = model._get_approval_requests()
         </field>
+    </record>
+
+    <record id="open_tutorials_page" model="ir.actions.act_url">
+      <field name="name">Custom Action</field>
+      <field name="url">/ausencias</field>
+      <field name="target">new</field>
     </record>
 
     <menuitem
@@ -157,6 +180,14 @@
             name="Configuration"
             parent="hr_holidays.menu_hr_holidays_root"
             sequence="5"/>
+
+    <menuitem
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            id="tutorial_open"
+            name="Tutorial"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="99"
+            action="open_tutorials_page"/>
 
             <template id="mail.message_notification_email">
             <div>
@@ -221,6 +252,7 @@
             </template>
 
             <record id="hr_holidays.hr_leave_allocation_view_form_dashboard" model="ir.ui.view">
+
                 <field name="name">hr.leave.view.form.dashboard</field>
                 <field name="model">hr.leave.allocation</field>
                 <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form"/>

@@ -46,9 +46,9 @@
                  <div class="col-7"><input type="date" id="final" name="final"/></div>
                </div>
                <div class="col-12 text-top">
-                 <select name="cars" id="cars">
-                  <option value="volvo">Recibidos</option>
-                  <option value="saab">Emitidos</option>
+                 <select name="tipo_solicitud" id="tipo_solicitud">
+                  <option value="Receptor">Recibidos</option>
+                  <option value="Emisor">Emitidos</option>
                 </select>
                </div>
                <div class="col-12" align="center">

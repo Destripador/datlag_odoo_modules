@@ -3,11 +3,11 @@
     'name': "datlag_cfdi",
 
     'summary': """
-        Desarrollos
+        Desarrollosssssssss
         """,
 
     'description': """
-        Long description of module's purpose
+        csacsacsacsacsacsacsacsa
     """,
 
     'author': "DatLag",

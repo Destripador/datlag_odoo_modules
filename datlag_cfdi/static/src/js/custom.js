@@ -38,15 +38,29 @@ odoo.define('hello_world.main', function (require) {
                 'id': this.getSelectedIds(),
                 'start': $('#start').val(),
                 'end': $('#final').val(),
+                'tipo_solicitud': $('#tipo_solicitud option:selected').val(),
               }],
             }).then(function(result){
-             if (result == true){
-               $('#validarlas').children('i').attr('class','fa fa-fw o_button_icon fa-check-circle')
-             }
+              var a = document.createElement("a"); //Create <a>
+              a.href = "data:application/zip;base64," + result['paquete_b64']; //Image Base64 Goes here
+              a.download = "Image.zip"; //File name Here
+              a.click(); //Downloaded file
+
             });
+            return;
       }
       this._super(event);
   	},
   });
 
 });
+
+function base64ToBuffer(str){
+    str = window.atob(str); // creates a ASCII string
+    var buffer = new ArrayBuffer(str.length),
+        view = new Uint8Array(buffer);
+    for(var i = 0; i < str.length; i++){
+        view[i] = str.charCodeAt(i);
+    }
+    return buffer;
+}

@@ -32,16 +32,16 @@ class HrLeave(models.Model):
                     notification_ids = []
                     notification_ids.append((0,0,{
                         'res_partner_id': current_employee.user_id.partner_id.id,
-                        'notification_type':'email'}))
+                        'notification_type':'inbox'}))
 
-                    current_employee.message_post(
+                    holiday.employee_id.message_post(
                         body=notifi,
+                        subject='Solicitud de vacaciones',
                         subtype_xmlid='mail.mt_comment',
                         email_layout_xmlid='mail.mail_notification_light',
                         author_id=self.env['res.users'].browse(1).id,
-                        message_type='email',
                         notification_ids=notification_ids,
-                        partner_ids=[x[2]['validating_users']]
+                        partner_ids=[current_employee.user_id.partner_id.id]
                         )
 
         return holidays
@@ -52,7 +52,7 @@ class HrLeave(models.Model):
 
     def action_approve(self):
         """ Compruebe si se agrega alguna tarea
-        pendiente si así reasigna el pendiente tarea else llamar a la aprobación """
+        pendiente si así reasigna el pendiente tarea else llamar a la aprobación  csacsacsa"""
         # if leave_validation_type == 'both':
         # this method is the first approval approval
         # if leave_validation_type != 'both': t

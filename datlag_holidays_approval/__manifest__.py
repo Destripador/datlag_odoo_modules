@@ -12,9 +12,11 @@
     'depends': ['base_setup', 'hr_holidays'],
     'data': [
         'views/leave_request.xml',
+        'views/templates.xml',
         'security/ir.model.access.csv',
         'security/security.xml'
     ],
+    'qweb': ['static/src/xml/ausencias.xml'],
     'demo': [],
     'images': ['static/description/banner.png'],
     'license': "AGPL-3",

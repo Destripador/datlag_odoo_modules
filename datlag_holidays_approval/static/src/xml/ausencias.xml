@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <odoo>
+    <data>
+      <!-- webpage record -->
+      <template id="ausencias_web_page" name="Ausencias" page="True">
+        <t t-call="website.layout">
+          <div id="wrap" class="oe_structure oe_empty">
+            <!-- Your content here -->
+      <section class="s_table_of_content pb24 o_colored_level undefined o_cc o_cc1 pt0" data-snippet="s_table_of_content" data-name="Table of Content" style="position: relative;">
+        <div class="container">
+          <div class="row s_nb_column_fixed">
+            <div class="s_table_of_content_navbar_wrap s_table_of_content_navbar_sticky s_table_of_content_vertical_navbar d-print-none d-none d-lg-block o_not_editable o_colored_level col-lg-3 undefined" data-name="Navbar" style="background-color: rgb(233, 236, 239) !important;">
+              <div class="s_table_of_content_navbar list-group" style="">
+                <a href="#table_of_content_heading_1629927487329_8" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0">&amp;nbsp;&amp;nbsp;AUSENCIAS&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</a>
+                <a href="#table_of_content_heading_1629927487329_9" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0">MODULOS&amp;nbsp;</a>
+                <a href="#table_of_content_heading_1629927487330_10" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 active">
+                    TABLA DE VACACIONES&amp;nbsp;
+                  </a>
+                <a href="#table_of_content_heading_1629927487330_11" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0" data-original-title="" title="" aria-describedby="tooltip112617">&amp;nbsp;</a>
+              </div>
+            </div>
+            <div class="s_table_of_content_main oe_structure oe_empty o_colored_level undefined col-lg-9" data-name="Content" style="background-color: rgb(255, 255, 255) !important;" data-editor-message="ARRASTRE BLOQUES AQUÍ">
+              <section class="s_title o_colored_level undefined o_cc o_cc1 pb4 pt8" data-vcss="001" data-snippet="s_title" data-name="Title" data-oe-shape-data="{&quot;shape&quot;:&quot;web_editor/Bold/04&quot;,&quot;colors&quot;:{&quot;c2&quot;:&quot;#F5F9F9&quot;,&quot;c3&quot;:&quot;#003163&quot;},&quot;flip&quot;:[]}" style="position: relative;">
+                <div class="o_we_shape o_web_editor_Bold_04" style="background-image: url(&quot;/web_editor/shape/web_editor/Bold/04.svg?c2=%23F5F9F9&amp;c3=%23003163&quot;);"/>
+                <div class="s_allow_columns container">
+                  <h2 style="text-align: left; margin-bottom: 0.625rem; font-family: Poppins, &quot;Odoo Unicode Support Noto&quot;, sans-serif; line-height: 1.2; font-size: 2.34375rem;" id="table_of_content_heading_1629927487329_8" data-anchor="true"><font style="font-weight: 400; color: rgb(17, 81, 114);"><span style="font-weight: bolder;">&amp;nbsp;</span></font><img class="img-fluid o_we_custom_image rounded-circle" src="/web/image/27069-6db5e6af/8.PNG" alt="" data-original-title="" title="" aria-describedby="tooltip439221" loading="lazy" data-original-id="27068" data-original-src="/web/image/27068-838adc64/8.PNG" data-mimetype="image/png" data-resize-width="77"/>&amp;nbsp;<font style="color: rgb(0, 49, 99);">AUSENCIAS</font>&amp;nbsp;&amp;nbsp;&amp;nbsp;<font style="font-weight: 400; color: rgb(17, 81, 114);"><span style="font-weight: bolder;">&amp;nbsp;</span></font></h2>
+                </div>
+              </section>
+              <section class="s_title o_colored_level pb0 pt176 oe_img_bg" data-vcss="001" data-snippet="s_title" data-name="Title" style="position: relative; background-image: url(&quot;/web/image/27070-de5f3e7f/1.PNG&quot;);" data-oe-shape-data="{&quot;shape&quot;:&quot;web_editor/Wavy/08&quot;,&quot;colors&quot;:{&quot;c2&quot;:&quot;rgba(255, 255, 255, 0.85)&quot;},&quot;flip&quot;:[&quot;y&quot;]}" data-original-id="27067" data-original-src="/web/image/27067-9f0268a7/1.PNG" data-mimetype="image/png" data-resize-width="1070">
+                <div class="o_we_shape o_web_editor_Wavy_08" style="background-image: url(&quot;/web_editor/shape/web_editor/Wavy/08.svg?c2=rgba(255%2C%20255%2C%20255%2C%200.85)&amp;flip=y&quot;); background-color: rgba(17, 81, 114, 0) !important; background-position: 50% 100%;"/>
+                <div class="s_allow_columns container">
+                  <h2 id="table_of_content_heading_1629927487329_9" data-anchor="true" style="margin-bottom: 0.625rem; font-family: Poppins, &quot;Odoo Unicode Support Noto&quot;, sans-serif; font-weight: 400; line-height: 1.2; color: rgb(155, 169, 187); font-size: 2.34375rem; background-color: rgb(255, 255, 255); text-align: center;">MODULOS&amp;nbsp;</h2>
+                </div>
+              </section>
+              <section class="s_process_steps o_colored_level pt0 undefined o_cc o_cc1 pb0" data-snippet="s_process_steps" data-name="Steps" style="position: relative;">
+                <div class="container">
+                  <div class="row no-gutters">
+                    <div class="s_process_step o_colored_level pb0 pt0 col-lg-3">
+                      <div class="s_process_step_icon">
+                        <span> </span>
+                        <a href="/organigrama-pasos?#scrollTop=0" data-original-title="" title="" aria-describedby="tooltip733161">
+                          <i class="bg-white fa fa-3x mx-auto rounded rounded-circle fa-book" data-original-title="" title="" aria-describedby="tooltip450565" style="color: rgb(0, 49, 99);"/>
+                        </a>
+                        <span> </span>
+                      </div>
+                      <div class="s_process_step_content text-center">
+                        <p>
+                          <font face="Poppins, Odoo Unicode Support Noto, sans-serif" color="#115172">
+                            <span style="font-size: 18px;">
+                              <b>Procedimiento&amp;nbsp;</b>
+                            </span>
+                          </font>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="s_process_step o_colored_level pb0 pt0 col-lg-3">
+                      <div class="s_process_step_icon">
+                        <span> </span>
+                        <a href="https://drive.google.com/file/d/127p4iQTkeVDsuAtndAsKu84MKaemPAmF/view?usp=sharing">
+                          <i class="bg-white fa fa-3x mx-auto rounded-circle fa-user" data-original-title="" title="" aria-describedby="tooltip295009" style="color: rgb(0, 49, 99);"/>
+                        </a>
+                        <span> </span>
+                      </div>
+                      <div class="s_process_step_content text-center">
+                        <p>
+                          <font face="Poppins, Odoo Unicode Support Noto, sans-serif" color="#115172">
+                            <b style="font-size: 18px;">&amp;nbsp;Manual solicitud</b>
+                          </font>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="s_process_step o_colored_level pt0 pb0 col-lg-3" style="">
+                      <div class="s_process_step_icon">
+                        <span> </span>
+                        <a href="https://drive.google.com/file/d/1k0wf7vMWbd8g_i3TTMRUPPw_G072iHc4/view?usp=sharing" data-original-title="" title="" aria-describedby="tooltip885674">
+                          <i class="bg-white fa fa-3x mx-auto rounded-circle fa-group" data-original-title="" title="" aria-describedby="tooltip711591" style="color: rgb(0, 49, 99);"/>
+                        </a>
+                        <span> </span>
+                      </div>
+                      <div class="s_process_step_content text-center">
+                        <p>
+                          <font face="Poppins, Odoo Unicode Support Noto, sans-serif" color="#115172">
+                            <span style="font-size: 18px;">
+                              <b>Manual&amp;nbsp;Aprobación</b>
+                            </span>
+                          </font>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="s_process_step o_colored_level pb0 col-lg-3 pt0" style="">
+                      <div class="s_process_step_icon">
+                        <span> </span>
+                        <a href="/videos-ausencias" data-original-title="" title="" aria-describedby="tooltip885674">
+                          <i class="bg-white fa mx-auto rounded-circle fa-caret-right fa-3x" data-original-title="" title="" aria-describedby="tooltip711591" style="color: rgb(0, 49, 99);"/>
+                        </a>
+                        <span> </span>
+                      </div>
+                      <div class="s_process_step_content text-center">
+                        <p>
+                          <b><font face="Poppins, Odoo Unicode Support Noto, sans-serif" color="#115172"><span style="font-size: 18px;">Videos&amp;nbsp;</span></font>&amp;nbsp;&amp;nbsp;</b>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="s_picture o_colored_level undefined o_cc o_cc1 pb8 pt32" data-snippet="s_picture" data-name="Picture" style="position: relative;">
+                <div class="container">
+                  <h2 style="margin-bottom: 0.625rem; font-family: Poppins, &quot;Odoo Unicode Support Noto&quot;, sans-serif; font-weight: 400; line-height: 1.2; font-size: 2.34375rem; text-align: center;" id="table_of_content_heading_1629927487330_10" data-anchor="true">
+                    <font style="" class="text-o-color-5">TABLA DE VACACIONES&amp;nbsp;</font>
+                  </h2>
+                </div>
+              </section>
+              <section class="s_text_block o_colored_level undefined o_cc o_cc1 pb24 pt24" data-snippet="s_text_block" data-name="Text">
+                <div class="s_allow_columns o_container_small">
+                  <p>
+                    <span style="font-size: 18px; text-align: center; background-color: rgb(255, 255, 255);">&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; El&amp;nbsp; empleado tiene derecho a vacaciones, por ley, al menos 6 días al&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;finalizar el primer año de trabajo .</span>
+                    <br/>
+                  </p>
+                </div>
+              </section>
+              <section class="s_carousel_wrapper" data-vxml="001" data-snippet="s_carousel" data-name="Carousel">
+                <div id="myCarousel1628284036413" class="s_carousel s_carousel_default carousel slide" data-interval="10000">
+                  <ol class="carousel-indicators o_we_no_overlay">
+                    <li data-target="#myCarousel1628284036413" data-slide-to="0" style="text-align: center; ">
+                      <br/>
+                    </li>
+                    <li data-target="#myCarousel1628284036413" data-slide-to="1" class="active">
+                      <br/>
+                    </li>
+                    <li data-target="#myCarousel1628284036413" data-slide-to="2">
+                      <br/>
+                    </li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item o_colored_level pt72 pb88 oe_img_bg" style="background-image: url(&quot;/web/image/website.s_carousel_default_image_2&quot;);" data-name="Slide">
+                      <div class="container">
+                        <div class="row content">
+                          <div class="carousel-content col-lg-8 offset-lg-2 bg-black-50 text-center pt48 pb40 o_colored_level">
+                            <h2 style="font-size: 62px;" class="o_default_snippet_text" id="table_of_content_heading_1629927487330_11" data-anchor="true">Lema inteligente</h2>
+                            <div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                              <hr class="w-25 mx-auto" style="border-top-width: 1px; border-top-style: solid;"/>
+                            </div>
+                            <p class="lead o_default_snippet_text">La narración de historias es poderosa.<br/> Atrae a los lectores y los involucra.</p>
+                            <p>
+                              <a href="/" class="btn btn-primary mb-2 o_default_snippet_text">Comience su trayecto</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev o_we_no_overlay" href="#myCarousel1628284036413" data-slide="prev" role="img" aria-label="Anterior" title="Anterior">
+                    <span class="carousel-control-prev-icon" data-original-title="" title="" aria-describedby="tooltip741492"/>
+                    <span class="sr-only o_default_snippet_text">Anterior</span>
+                  </a>
+                  <a class="carousel-control-next o_we_no_overlay" href="#myCarousel1628284036413" data-slide="next" role="img" aria-label="Siguiente" title="Siguiente">
+                    <span class="carousel-control-next-icon" data-original-title="" title="" aria-describedby="tooltip703855"/>
+                    <span class="sr-only o_default_snippet_text">Siguiente</span>
+                  </a>
+                </div>
+              </section>
+              <section class="s_product_catalog oe_custom_bg o_colored_level pt0 undefined o_cc o_cc1 pb64" style="position: relative; background-position: 74.1722% 0%;" data-vcss="001" data-snippet="s_product_catalog" data-name="Pricelist" data-oe-shape-data="{&quot;shape&quot;:&quot;web_editor/Bold/12&quot;,&quot;colors&quot;:{&quot;c1&quot;:&quot;#003163&quot;,&quot;c2&quot;:&quot;#FFFFFF&quot;,&quot;c5&quot;:&quot;#F5F9F9&quot;},&quot;flip&quot;:[&quot;x&quot;]}">
+                <div class="o_we_shape o_web_editor_Bold_12" style="background-image: url(&quot;/web_editor/shape/web_editor/Bold/12.svg?c1=%23003163&amp;c2=%23FFFFFF&amp;c5=%23F5F9F9&amp;flip=x&quot;); background-position: 50% 50%;"/>
+                <div class="o_container_small">
+                  <p style="text-align: center; ">
+                    <br/>
+                  </p>
+                  <p style="text-align: center; ">
+                    <font style="font-size: 18px;">&amp;nbsp;</font>
+                  </p>
+                  <div class="row">
+                    <div class="pt16 o_colored_level pb0 col-lg-4 offset-lg-2 undefined o_cc o_cc1" style="">
+                      <div style="text-align: center;">
+                        <b style="color: inherit; font-family: Nunito, &quot;Odoo Unicode Support Noto&quot;, serif; font-size: 20px;">
+                          <font style="" class="text-black">Años de antigüedad</font>
+                        </b>
+                      </div>
+                      <ul class="list-unstyled my-3">
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_title d-flex align-items-baseline pb-2">
+                            <span class="s_product_catalog_dish_name" style="text-align: left;">
+                              <font style="font-size: 18px;" class="text-black">1 AÑO&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price" style="text-align: left;">
+                              <br/>
+                            </span>
+                          </p>
+                          <p class="border-top pt-1 s_product_catalog_dish_description text-muted" style="text-align: left;">
+                            <font style="font-size: 18px;" class="text-black">2 AÑOS</font>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="border-top pt-1 s_product_catalog_dish_description text-muted" style="text-align: left;">
+                            <span class="s_product_catalog_dish_name">
+                              <font style="font-size: 18px;" class="text-black">3 AÑOS&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price">
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;</font>
+                            </span>
+                          </p>
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">4 AÑOS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <span class="s_product_catalog_dish_name">
+                              <font style="font-size: 18px;" class="text-black">5 A 9 AÑOS&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price">
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;</font>
+                            </span>
+                          </p>
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">10 A 14 AÑOS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">15 A 19 AÑOS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">20 A 24 AÑOS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">25 A 29 AÑOS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pt16 o_colored_level col-lg-4 pb4 undefined bg-white" style="">
+                      <h3>
+                        <span style="font-size: 20px;" class="text-black">Días&amp;nbsp;de vacaciones&amp;nbsp;</span>
+                      </h3>
+                      <ul class="list-unstyled my-3">
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_title d-flex align-items-baseline pb-2">
+                            <span class="s_product_catalog_dish_name" style="text-align: left;">
+                              <font style="font-size: 18px;" class="text-black">6 DIAS&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price" style="text-align: left;">
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;</font>
+                            </span>
+                          </p>
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <font style="font-size: 18px;" class="text-black">8 DIAS&amp;nbsp;</font>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <span class="s_product_catalog_dish_name">
+                              <font style="font-size: 18px;" class="text-black">10 DIAS&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price">
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;</font>
+                            </span>
+                            <i>
+                              <br/>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">12 DIAS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <span class="s_product_catalog_dish_name">
+                              <font style="font-size: 18px;" class="text-black">14 DIAS&amp;nbsp;</font>
+                            </span>
+                            <span class="ml-auto pl-2 s_product_catalog_dish_price">
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;</font>
+                            </span>
+                          </p>
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">16 DIAS</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">18 DIAS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">20 DIAS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                        <li class="s_product_catalog_dish" data-name="Product">
+                          <p class="s_product_catalog_dish_description border-top text-muted pt-1" style="text-align: left;">
+                            <i>
+                              <font style="font-size: 18px;" class="text-black">&amp;nbsp;22 DIAS&amp;nbsp;</font>
+                            </i>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+          </div>
+        </t>
+      </template>
+    </data>
+  </odoo>
