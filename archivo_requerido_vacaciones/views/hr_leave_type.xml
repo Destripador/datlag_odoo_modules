@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="edit_holiday_status_form" model="ir.ui.view">
+      <field name="name">hr.leave.type.form</field>
+      <field name="model">hr.leave.type</field>
+      <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+      <field name="arch" type="xml">
+        <group name="leave_validation">
+          <field name="attachment_required"/>
+        </group>
+      </field>
+    </record>
+
+    <record id="holiday_add_attache" model="ir.ui.view">
+      <field name="name">hr.leave.attache.type.form</field>
+      <field name="model">hr.leave</field>
+      <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[last()]" position="before">
+            <field name="attachment_required" invisible="1"/>
+            <field name="attach_file_name" invisible="1"/>
+            <div class="row">
+              <div class="col-8">
+              </div>
+              <div class="col-4">
+                <group colspan="4">
+                  <field col="2" name="attach_file" filename="attach_file_name" attrs="{'invisible': [('attachment_required', '=', False)]}"/>
+                </group>
+              </div>
+            </div>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
