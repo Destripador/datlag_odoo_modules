@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="edit_holiday_status_form" model="ir.ui.view">
+      <field name="name">hr.leave.type.form</field>
+      <field name="model">hr.leave.type</field>
+      <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+      <field name="arch" type="xml">
+        <group name="leave_validation">
+          <field string="Solicitar archivo" name="attachment_required"/>
+          <field string="Solicitar prima vacacional" name="solicitar_prima"/>
+        </group>
+      </field>
+    </record>
+
+    <record id="holiday_add_attache" model="ir.ui.view">
+      <field name="name">hr.leave.attache.type.form</field>
+      <field name="model">hr.leave</field>
+      <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[last()]" position="before">
+            <field name="attachment_required" invisible="1"/>
+            <field name="attach_file_name" invisible="1"/>
+            <field name="solicitar_prima" invisible="1"/>
+            <field name="prima_vacacional" invisible="1"/>
+            <div class="container" attrs="{'invisible': [('attachment_required', '=', False)]}">
+                <div class="alert alert-info">
+                  <div class="row">
+                    <div class="col-12 col-sm-7 col-md-8 col-lg-9">
+                      <strong>Importante:</strong><t> Para solicitar este tipo de ausencia, es necesario agregar un documento que justifique la inasistencia. (archivos validos PDF o JPG)</t>
+                    </div>
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3" style="text-align: center; margin-top: 5px">
+                      <field name="attach_file" filename="attach_file_name" attrs="{'invisible': [('attachment_required', '=', False)]}"/>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="container" attrs="{'invisible': [('solicitar_prima', '=', False)]}">
+              <div class="alert alert-info">
+                <div class="row">
+                    <div class="col-12 col-sm-7 col-md-8 col-lg-9" attrs="{'invisible': [('prima_vacacional', '!=', False)]}">
+                      Solicitar prima vacacional: <field name="prima_vacacional" attrs="{'invisible': [('prima_vacacional', '!=', False)]}"/>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-8 col-lg-9" attrs="{'invisible': [('prima_vacacional', '=', False)]}">
+                      La prima vacacional se ha solicitado el dia: <field name="fecha_solicitud_prima" attrs="{'invisible': [('prima_vacacional', '=', False)]}"/>
+                    </div>
+
+                  <div class="col-12 col-sm-5 col-md-4 col-lg-3" groups="hr_holidays.group_hr_holidays_manager">
+                    <button name="revocar_prima" string="Revocar prima vacacional" type="object" attrs="{'invisible': [('prima_vacacional', '=', False)]}"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_requisition_tree_inherit">
+       <field name="name">hr_holidays.hr_leave_view_tree</field>
+       <field name="model">hr.leave</field>
+       <field name="type">tree</field>
+       <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+       <field name="arch" type="xml">
+         <xpath expr="/tree/field[@name='name']" position="after">
+            <field name="prima_vacacional" widget="widgetonbutton" string="Prima"/>
+         </xpath>
+       </field>
+   </record>
+
+  </data>
+</odoo>
