@@ -1,0 +1,162 @@
+<odoo>
+  <data>
+
+    <template name="My Portal" id="portal.portal_my_home">
+            <t t-call="portal.portal_layout">
+              <link href="/gossler_portal/static/src/css/gossler_portal.css" rel="stylesheet" type="text/css"/>
+                    <script type="text/javascript" src="/gossler_portal/static/src/js/gossler_portal.js"/>
+
+                         <div class="container o_portal_my_home_nuevo">
+
+                          <div class="row profile">
+
+                          <t t-call="gossler_portal.side_bar_user_info"/>
+
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9 pull-up">
+                            <div id="wrap" class="oe_structure oe_empty">
+                              <section class="s_tabs pt48 pb48 o_colored_level" data-vcss="001" data-snippet="s_tabs" data-name="Tabs" style="">
+                                <div class="container">
+                                  <div class="s_tabs_main card">
+                                    <div class="s_tabs_nav card-header">
+                                      <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="nav_tabs_link_1620942661576_7" data-toggle="tab" href="#nav_tabs_content_1620942661576_7" role="tab" aria-controls="nav_tabs_content_1620942661576_7" aria-selected="true" data-original-title="" title="" aria-describedby="tooltip772351">
+                                              Perfil
+                                            </a>
+                                        </li>
+                                        <t t-if="request.env.user.employee_id.activity_ids">
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="nav_tabs_link_1620942661576_8" data-toggle="tab" href="#nav_tabs_content_1620942661576_8" role="tab" aria-controls="nav_tabs_content_1620942661576_8" aria-selected="false" data-original-title="" title="">
+                                              Pendientes
+                                              <t t-if="request.env.user.employee_id.activity_ids">
+                                                <t t-set="i" t-value="0"/>
+                                                <t t-foreach="request.env.user.employee_id.activity_ids" t-as="line">
+                                                  <t t-set="i" t-value="i+1"/>
+                                                </t>
+                                                <span t-attf-class="badge badge-pill badge-danger" t-esc="i" />
+                                              </t>
+                                            </a>
+                                        </li>
+                                        </t>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="nav_tabs_link_apps" data-toggle="tab" href="#nav_tabs_content_apps" role="tab" aria-controls="nav_tabs_content_1620942661576_9" aria-selected="false" data-original-title="" title="">
+                                              Enlaces
+                                            </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                    <div class="s_tabs_content tab-content card-body">
+
+                                      <div class="tab-pane fade active show" id="nav_tabs_content_1620942661576_7" role="tabpanel" aria-labelledby="nav_tabs_link_1620942661576_7">
+                                        <div class="row">
+                                            <!-- LISTA DE EQUIPO -->
+                                            <t t-call="gossler_portal.team_list"/>
+                                            <!-- INICIO INFORMACION PERSONAL -->
+                                            <t t-call="gossler_portal.personal_info"/>
+                                        </div>
+                                      </div>
+
+                                      <div class="tab-pane fade" id="nav_tabs_content_1620942661576_8" role="tabpanel" aria-labelledby="nav_tabs_link_1620942661576_8">
+                                        <div class="oe_structure oe_empty" data-editor-message="ARRASTRE BLOQUES AQUÍ">
+                          <!-- inicio notificaciones-->
+                                        <div class="container s_allow_columns">
+                                            <div class="row">
+                                                <t t-if="request.env.user.employee_id.activity_ids">
+                                                <t t-foreach="request.env.user.employee_id.activity_ids" t-as="line">
+                                                <div class="o_colored_level col-lg-12">
+                                                    <div class="s_card card bg-white w-100" data-snippet="s_card" data-name="Card">
+                                                      <h6 class="card-header o_default_snippet_text">
+                                                          <i t-attf-class="fa fa-1x {{line.icon}} mr8"/><t t-esc="line.display_name"/>
+                                                      </h6>
+                                                      <div class="card-body">
+                                                        <t t-raw="line.note"/>
+                                                        Actividad creada por <t t-esc="line.create_uid.name"/>
+                                                      </div>
+                                                      <div class="card-footer o_default_snippet_text">
+                                                        <i class="fa fa-1x fa-clock-o mr8"/>
+                                                        <t t-if="line.state == 'planned'">PLANEADO PARA <t t-esc="line.date_deadline"/></t>
+                                                        <t t-elif="line.state == 'overdue'">VENCIDO <t t-esc="line.date_deadline"/> | CONTACTESE CON EL CREADOR DE LA ACTIVIDAD</t>
+                                                        <t t-elif="line.state == 'today'">HOY VENCE</t>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                </t>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="o_colored_level col-lg-12">
+                                                        <div class="alert alert-success" role="alert">
+                                                          Todo en orden
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                          <!-- fin notificaciones -->
+                                        </div>
+                                      </div>
+
+                                      <div class="tab-pane fade" id="nav_tabs_content_apps" role="tabpanel" aria-labelledby="nav_tabs_link_apps">
+                                        <div class="o_portal_my_home">
+                                                            <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                                                            <h3>Documents</h3>
+                                                            <div class="o_portal_docs list-group">
+                                                            </div>
+                                                        </div>
+                                          <t t-call="gossler_portal.apps_lists"/>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                            </div>
+                                </div>
+                            </div>
+                          </div>
+
+
+
+
+
+                          <!-- inicio MODAL LOGROS -->
+                          <div class="modal fade bd-example-modal-lg" t-attf-id="modalplus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Logros</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">x</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card-columns">
+                                            <t t-foreach="request.env.user.badge_ids" t-as="line">
+                                            <t t-if="line.badge_id.image_1920">
+                                                <div class="card p-1">
+                                                    <div class="d-flex justify-content-center">
+                                                        <img class="card-img-top resize-50" t-attf-src="data:image/*;base64,{{line.badge_id.image_1920}}"/>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><t t-esc="line.badge_id.name" /></h5>
+                                                        <p class="card-text"><t t-esc="line.comment" /></p>
+                                                        <p class="card-text"><t t-esc="line.badge_id.description" /></p>
+                                                        <p class="card-text">Otorgada por <t t-esc="line.sender_id.name" /></p>
+                                                        <p class="card-text">Insignia de nivel <t t-esc="line.level" t-lang="esp" /></p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <small class="text-muted"><t t-esc="line.write_date" /></small>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- final MODAL LOGROS -->
+                       </t>
+         </template>
+
+  </data>
+</odoo>

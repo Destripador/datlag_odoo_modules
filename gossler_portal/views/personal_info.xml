@@ -1,0 +1,119 @@
+<odoo>
+    <data>
+        <template id="personal_info">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <h6>Informacion Privada</h6><br></br>
+            <table class="table table-striped">
+              <thead>
+                </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="">
+                        <font style="color: rgb(0, 49, 99); font-size: 12px;">Correo</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.work_email"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="">
+                       <font style="color: rgb(0, 49, 99); font-size: 12px;">Departamento</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.department_id.name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="">
+                        <font style="color: rgb(0, 49, 99); font-size: 12px;">Gerente</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.coach_id.name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                           <font style="color: rgb(0, 49, 99); font-size: 12px;">Pin Impresora </font>
+                      </th>
+                      <td>
+                        <span  t-esc="request.env.user.employee_id.x_pin_impresora"/>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </template>
+
+
+        <template id="side_bar_user_info">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">
+            <div class="profile-sidebar">
+
+              <div class="profile-userpic">
+                  <t t-if="request.env.user.employee_id.parent_id.name">
+                     <img class="rounded-circle d-block mx-auto profile-logo" t-attf-src="data:image/*;base64,{{request.env.user.employee_id.image_256}}"/>
+                  </t>
+              </div>
+
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  <p class="name-field" t-field="user_id.partner_id"/>
+                </div>
+                <div class="profile-usertitle-job">
+                  <t t-if="request.env.user.employee_id.job_id.name">
+                      <p class="o_default_snippet_text">
+                        <span t-esc="request.env.user.employee_id.job_id.name"/>
+                      </p>
+                  </t>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                  <a type="button" href="/web#action=107" class="btn btn-sm btn-warning">Entrar a portal</a>
+              </div>
+              <br/>
+
+              <t t-call="gossler_portal.get_rewards"/><br/>
+
+            </div>
+          </div>
+        </template>
+
+
+        <template id="get_rewards">
+            <t t-if="request.env.user.badge_ids">
+              <div class="col-md-12">
+                  <div class="row">
+                      <t t-set="counter" t-value="0"/>
+                          <t t-foreach="request.env.user.badge_ids" t-as="line">
+                             <t t-ifbody="line.badge_id.image_1920">
+                                  <t t-if="counter &lt; 3">
+                                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                                      <a data-toggle="tooltip" t-attf-title="{{line.badge_id.name}}" data-placement="bottom" t-attf-onclick="exampleOnclick('{{line.display_name}}','{{line.comment}}','{{line.level}}','{{line.sender_id.name}}','{{line.write_date}}','{{line.badge_id.description}}','{{line.badge_id.image_1920}}')">
+                                        <img class="img-reward" t-attf-src="data:image/*;base64,{{line.badge_id.image_1920}}"/>
+                                      </a>
+                                  </div>
+                                  </t>
+                                  <t t-set="counter" t-value="counter + 1"/>
+                                  </t>
+                              </t>
+                           <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3" >
+                              <a data-toggle="modal" t-attf-data-target="#modalplus" data-placement="bottom" t-attf-title="ver todos">
+                                  <div class="circle_container">
+                                    <div class="circle_main">
+                                      <div class="circle_text_container">
+                                        <div class = "circle_text">
+                                          +
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </a>
+                          </div>
+                      </div>
+              </div>
+          </t>
+        </template>
+
+    </data>
+</odoo>

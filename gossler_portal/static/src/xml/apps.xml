@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright (c) 2017-today MuK IT GmbH.
+
+    This file is part of MuK Grid Snippets
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<templates id="template" xml:space="preserve">
+
+	<t t-name="apps_list">
+			<t t-foreach="request.env['ir.ui.menu'].search([])" t-as="line">
+				<t t-foreach="line.groups_id" t-as="groups">
+					<t t-if="groups.id==1">
+						<li class="nav-item">
+							<a t-att-href="'/web#menu_id=%s&amp;action=' % (line.id)">
+									<img class="mk_apps_sidebar_icon" t-attf-src="data:image/png;base64,#{line.web_icon_data}"/>
+									<span class="mk_apps_sidebar_name">
+										<t t-esc="line.name"/>
+									</span>
+							</a>
+						</li>
+					</t>
+				</t>
+			</t>
+  </t>
+
+</templates>

@@ -1,0 +1,393 @@
+.profile-logo {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1.25  auto;
+
+}
+.flex-row-reverse {
+    flex-direction:  !important;
+}
+
+
+//ORGANIGRAMA
+
+.profile-organigrama {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+//LINEA ORGANIGRAMA
+.s_timeline .s_timeline_line:before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    bottom: 0%;
+    left: 5%;
+    background-color: #343A40;
+}
+//IMAGEN ORGANIGRAMA
+.s_timeline .s_timeline_date {
+    position: absolute;
+    left: 0%;
+    right: auto;
+}
+//INFO ORGANIGRAMA
+.s_timeline .s_timeline_row.flex-row-reverse .s_timeline_content:not(:last-child) {
+      margin-left: -75%;
+}
+.ml-auto, .mx-auto, .o_portal_security_body {
+
+}
+
+
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 20px 0;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-usertitle-text {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 10px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 10px;
+}
+
+.profile-usermenu {
+  margin-top: 50px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+/* Profile Content */
+.profile-content {
+  background: #fff;
+}
+
+.style-six {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.style-four {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.img-reward{
+
+}
+
+.item {
+    position:relative;
+    padding-top:20px;
+    display:inline-block;
+}
+.notify-badge{
+    position: absolute;
+    right: 30%;
+    top: 20%;
+    background: red;
+    text-align: center;
+    border-radius: 30px 30px 30px 30px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 10px;
+}
+
+
+.rounded-circle{
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.img-reward{
+    width: 100%;
+}
+
+/* Main Container -  this controls the size of the circle */
+.circle_container
+{
+	width : 100%;
+	height : 100%;
+	margin : 0;
+	padding : 0;
+/*	border : 1px solid red; */
+}
+
+/* Circle Main draws the actual circle */
+.circle_main
+{
+	width : 100%;
+	height : 100%;
+	border-radius : 50%;
+	border : 1px solid #03040529;	/* can alter thickness and colour of circle on this line */
+	margin : 0;
+	padding : 0;
+}
+
+/* Circle Text Container - constrains text area to within the circle */
+.circle_text_container
+{
+	/* area constraints */
+	width : 70%;
+	height : 70%;
+	max-width : 70%;
+	max-height : 70%;
+	margin : 0;
+	padding : 0;
+
+	/* some position nudging to center the text area */
+	position : relative;
+	left : 25%;
+	top : 25%;
+
+	/* preserve 3d prevents blurring sometimes caused by the text centering in the next class */
+	transform-style : preserve-3d;
+
+	/*border : 1px solid green;*/
+}
+
+/* Circle Text - the appearance of the text within the circle plus vertical centering */
+.circle_text
+{
+	/* change font/size/etc here */
+	font: 11px "Tahoma", Arial, Serif;
+	text-align : center;
+
+	/* vertical centering technique */
+	position : relative;
+	top : 50%;
+	transform : translateY(-50%);
+}
+
+.resize-50{
+    width: 50%;
+}
+
+
+#footer {
+    background: linear-gradient(-45deg,rgba(102,102,102,.9) 37rem,#666 37rem);
+    padding: 5rem 0 1rem;
+    position: relative;
+    text-align: left;
+}
+
+.borderless table {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+
+.name-field{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.organigram-photo{
+    object-fit: cover;
+border-radius: 50%;
+height: 30px;
+width: 30px;
+}
+
+.pull-down{
+    margin-bottom: 15px;
+}
+
+.pull-up{
+    margin-top: -50px;
+}
+
+.text-small{
+    font-size: 12px;
+}
+
+.text-smallest{
+    font-size: 10px;
+}
+
+.gray-bar1 {
+  display:table;
+   height:50px;
+   position: relative;
+}
+
+.gray-bar1::after {
+  content: "";
+      height: 40px;
+      border-left: 5px solid #ddd;
+      position: absolute;
+      margin-left: 32px;
+      margin-top: -35px;
+      z-index: -1;
+}
+
+.table1 {
+  display: table;
+  font-family: sans-serif;
+  margin: 20px 0;
+}
+
+.row1 {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 10px;
+}
+
+.row1.fluid {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #0e100b08;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.row2 {
+  display: table-cell ;
+  vertical-align: middle;
+  padding: -0 100px;
+}
+
+.row2.fluid {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #0e100b08;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.o-app-icon-portal {
+    height: auto;
+    max-width: 7rem;
+    width: 100%;
+    flex-basis: 0;
+}
+
+.o_app-portal{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  width: 33.33333333%;
+}
+
+.apps_view{
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-webkit-flex-direction: column;
+flex-direction: column;
+top: 46px !important;
+overflow-x: hidden;
+overflow-y: auto;
+box-shadow: none;
+border: none;
+align-content: flex-start;
+overflow: inital;
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+flex-direction: row;
+-webkit-flex-wrap: wrap;
+flex-wrap: wrap;
+-webkit-box-pack: start;
+justify-content: flex-start;
+}
