@@ -46,46 +46,32 @@
 
 
         <template id="side_bar_user_info">
-          <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">
-            <div class="profile-sidebar">
-
-              <div class="profile-userpic">
-                  <t t-if="request.env.user.employee_id.parent_id.name">
-                     <img class="rounded-circle d-block mx-auto profile-logo" t-attf-src="data:image/*;base64,{{request.env.user.employee_id.image_256}}"/>
-                  </t>
-              </div>
-
-              <div class="profile-usertitle">
-                <div class="profile-usertitle-name">
-                  <p class="name-field" t-field="user_id.partner_id"/>
-                </div>
-                <div class="profile-usertitle-job">
-                  <t t-if="request.env.user.employee_id.job_id.name">
-                      <p class="o_default_snippet_text">
-                        <span t-esc="request.env.user.employee_id.job_id.name"/>
-                      </p>
-                  </t>
-                </div>
-              </div>
-
-              <div class="d-flex justify-content-center">
-                  <a type="button" href="/web#action=107" class="btn btn-sm btn-warning">Entrar a portal</a>
-              </div>
-              <br/>
-
-              <t t-call="gossler_portal.get_rewards"/><br/>
-
+          <div class="profile-userpic">
+              <t t-if="request.env.user.employee_id.parent_id.name">
+                 <img class="rounded-circle d-block mx-auto profile-logo" t-attf-src="data:image/*;base64,{{request.env.user.employee_id.image_256}}"/>
+              </t>
+          </div>
+          <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+               <p class="name-field" t-field="user_id.partner_id"/>
+            </div>
+            <div class="profile-usertitle-job">
+              <t t-if="request.env.user.employee_id.job_id.name">
+                <p class="o_default_snippet_text">
+                  <span t-esc="request.env.user.employee_id.job_id.name"/>
+                </p>
+              </t>
             </div>
           </div>
         </template>
 
 
         <template id="get_rewards">
-            <t t-if="request.env.user.badge_ids">
+            <t t-if="request.env.user.employee_id.badge_ids">
               <div class="col-md-12">
                   <div class="row">
                       <t t-set="counter" t-value="0"/>
-                          <t t-foreach="request.env.user.badge_ids" t-as="line">
+                          <t t-foreach="request.env.user.employee_id.badge_ids" t-as="line">
                              <t t-ifbody="line.badge_id.image_1920">
                                   <t t-if="counter &lt; 3">
                                   <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
@@ -113,6 +99,45 @@
                       </div>
               </div>
           </t>
+
+
+          <!-- inicio MODAL LOGROS -->
+          <div class="modal fade bd-example-modal-lg" t-attf-id="modalplus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Logros</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-columns">
+                            <t t-foreach="request.env.user.badge_ids" t-as="line">
+                            <t t-if="line.badge_id.image_1920">
+                                <div class="card p-1">
+                                    <div class="d-flex justify-content-center">
+                                        <img class="card-img-top resize-50" t-attf-src="data:image/*;base64,{{line.badge_id.image_1920}}"/>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><t t-esc="line.badge_id.name" /></h5>
+                                        <p class="card-text"><t t-esc="line.comment" /></p>
+                                        <p class="card-text"><t t-esc="line.badge_id.description" /></p>
+                                        <p class="card-text">Otorgada por <t t-esc="line.sender_id.name" /></p>
+                                        <p class="card-text">Insignia de nivel <t t-esc="line.level" t-lang="esp" /></p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted"><t t-esc="line.write_date" /></small>
+                                    </div>
+                                </div>
+                            </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- final MODAL LOGROS -->
         </template>
 
     </data>

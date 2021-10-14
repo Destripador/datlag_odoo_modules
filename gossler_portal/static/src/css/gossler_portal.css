@@ -348,7 +348,7 @@ width: 30px;
 .o-app-icon-portal {
     height: auto;
     max-width: 7rem;
-    width: 100%;
+    width: 54%;
     flex-basis: 0;
 }
 
@@ -364,7 +364,7 @@ width: 30px;
   flex-direction: column;
   -webkit-box-pack: start;
   justify-content: flex-start;
-  width: 33.33333333%;
+  width: 16.66666667%;
 }
 
 .apps_view{

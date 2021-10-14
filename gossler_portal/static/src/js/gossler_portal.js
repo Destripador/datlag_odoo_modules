@@ -19,6 +19,14 @@
 *    along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 **********************************************************************************/
+function clears() {
+      $('.page-wrapper').removeClass('toggled');
+}
+
+function adds() {
+      $(".page-wrapper").addClass("toggled");
+}
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
