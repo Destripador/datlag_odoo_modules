@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
       <!-- add css / js-->
-      <template id="assets_backend" name="module_name assets" inherit_id="web.assets_backend">
+      <template id="assets_backend_portal" name="js assets" inherit_id="web.assets_backend">
           <xpath expr="." position="inside">
             <!--link rel="stylesheet" type="text/scss" href="/gossler_portal/static/src/css/apps.scss"/-->
+
+              <script type="text/javascript" src="/gossler_portal/static/src/js/gossler_portal.js"/>
           </xpath>
         </template>
     </data>

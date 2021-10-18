@@ -1,12 +1,13 @@
 <odoo>
     <data>
         <template id="side_bar_static">
-          <nav id="sidebar" class="sidebar-wrapper">
+
+    <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="#"></a>
-        <div id="close-sidebar" t-attf-onclick="clears()">
-          <i class="fas fa-times"></i>
+        <a href="#"><small>beta</small></a>
+        <div id="close-sidebar" onclick="clears()">
+          <i class="fa fa-times"></i>
         </div>
       </div>
       <div class="sidebar-header">
@@ -20,129 +21,35 @@
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
-            <span>General</span>
+            <span>Portal</span>
           </li>
-          <li class="sidebar-dropdown">
-            <a href="/my/home">
-              <i class="fa fa-tachometer-alt"></i>
-              <span>Mi portal</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="/web#action=107">
-                    <i class="fa fa-tachometer-alt"></i>
-                    <span>Ingresar al portal</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 2</a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 3</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-shopping-cart"></i>
-              <span>E-commerce</span>
-              <span class="badge badge-pill badge-danger">3</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Products
+            <li>
+              <a href="/my/home">
+                <i class="fa fa-book"></i>
+                <span>Inicio</span>
+              </a>
+            </li>
+            <li>
+              <a href="/web#action=107">
+                <i class="fa fa-book"></i>
+                <span>Ingresar al portal</span>
+                <span class="badge badge-pill badge-primary">APPS</span>
+              </a>
+            </li>
 
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Orders</a>
-                </li>
-                <li>
-                  <a href="#">Credit cart</a>
-                </li>
-              </ul>
-            </div>
+          <li class="header-menu">
+            <span>Modulos</span>
           </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="far fa-gem"></i>
-              <span>Components</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">General</a>
-                </li>
-                <li>
-                  <a href="#">Panels</a>
-                </li>
-                <li>
-                  <a href="#">Tables</a>
-                </li>
-                <li>
-                  <a href="#">Icons</a>
-                </li>
-                <li>
-                  <a href="#">Forms</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Pie chart</a>
-                </li>
-                <li>
-                  <a href="#">Line chart</a>
-                </li>
-                <li>
-                  <a href="#">Bar chart</a>
-                </li>
-                <li>
-                  <a href="#">Histogram</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-globe"></i>
-              <span>Maps</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Google maps</a>
-                </li>
-                <li>
-                  <a href="#">Open street map</a>
-                </li>
-              </ul>
-            </div>
-          </li>
+          <t t-call="gossler_portal.apps_lists_drop"/>
+
           <li class="header-menu">
             <span>Extra</span>
           </li>
           <li>
             <a href="#">
               <i class="fa fa-book"></i>
-              <span>Documentation</span>
+              <span>Documentacion</span>
               <span class="badge badge-pill badge-primary">Beta</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Calendar</span>
             </a>
           </li>
           <li>
@@ -157,7 +64,6 @@
     </div>
     <!-- sidebar-content  -->
   </nav>
-
         </template>
     </data>
 </odoo>

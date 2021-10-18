@@ -1,7 +1,6 @@
 <odoo>
     <data>
         <template id="apps_lists">
-          <h5>Aplicaciones recomendadas</h5>
           <div class="apps_view">
               <t t-foreach="request.env['ir.ui.menu'].search([])" t-as="line">
                 <t t-foreach="line.groups_id" t-as="groups">
@@ -12,6 +11,23 @@
                             <t t-esc="line.name"/>
                           </span>
                       </a>
+                  </t>
+                </t>
+              </t>
+          </div>
+        </template>
+
+        <template id="apps_lists_drop">
+          <div class="apps_view">
+              <t t-foreach="request.env['ir.ui.menu'].search([])" t-as="line">
+                <t t-foreach="line.groups_id" t-as="groups">
+                  <t t-if="groups.id==1">
+                    <li>
+                      <a class="o_app-portal" t-att-href="'/web#menu_id=%s&amp;action=' % (line.id)">
+                        <img class="o-app-icon-portal-mini" t-attf-src="data:image/png;base64,#{line.web_icon_data}"/>
+                        <span class="pull-mini"><t t-esc="line.name"/></span>
+                      </a>
+                    </li>
                   </t>
                 </t>
               </t>

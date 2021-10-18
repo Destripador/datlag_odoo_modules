@@ -1,35 +1,33 @@
-/**********************************************************************************
-*
-*    Copyright (c) 2017-today MuK IT GmbH.
-*
-*    This file is part of MuK Grid Snippets
-*    (see https://mukit.at).
-*
-*    This program is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU Lesser General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*
-*    This program is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU Lesser General Public License for more details.
-*
-*    You should have received a copy of the GNU Lesser General Public License
-*    along with this program. If not, see <http://www.gnu.org/licenses/>.
-*
-**********************************************************************************/
+$(document).ready(function(){
+  $('.sidebar-wrapper')
+    .each(toggle_handler)
+    .on('change', toggle_handler);
+});
+
+var toggle_handler = function(){
+  if (localStorage.getItem("side_bar_portal") == null) {
+      //hide or show menu by default
+      $(".page-wrapper").addClass("toggled");
+      localStorage.setItem("side_bar_portal", "True");
+  }else{
+     if(localStorage.getItem("side_bar_portal") == "True"){
+       $(".page-wrapper").addClass("toggled");
+     }else{
+       $(".page-wrapper").removeClass("toggled");
+     }
+  }
+};
+
 function clears() {
-      $('.page-wrapper').removeClass('toggled');
+      $(".page-wrapper").removeClass("toggled");
+      localStorage.setItem("side_bar_portal", "False");
 }
 
 function adds() {
       $(".page-wrapper").addClass("toggled");
+      localStorage.setItem("side_bar_portal", "True");
 }
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
 
 function exampleOnclick(name_a,comment_a,level_a,sender_a,date_a,description_a,photo_a) {
   var name = name_a;

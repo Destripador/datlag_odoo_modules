@@ -351,6 +351,16 @@ width: 30px;
     width: 54%;
     flex-basis: 0;
 }
+.o-app-icon-portal-mini {
+    height: auto;
+    max-width: 7rem;
+    width: 10%;
+    flex-basis: 0;
+}
+
+.pull-mini{
+  margin-left: 4px
+}
 
 .o_app-portal{
   display: -webkit-box;

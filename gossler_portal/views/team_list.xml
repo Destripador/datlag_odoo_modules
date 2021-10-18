@@ -1,9 +1,9 @@
 <odoo>
     <data>
         <template id="team_list">
-          
+
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <h5>Equipo <t t-esc="request.env.user.department_id.name"/></h5>
+            <h6>Equipo <t t-esc="request.env.user.department_id.name"/></h6>
             <div class="graybar">
               <t t-foreach="request.env.user.department_id.member_ids" t-as="line">
                 <t t-if="request.env.user.employee_ids.parent_id.parent_id.parent_id">
