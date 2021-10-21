@@ -182,7 +182,7 @@
             sequence="5"/>
 
     <menuitem
-            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_responsible"
+            groups="base.group_portal"
             id="tutorial_open"
             name="Tutorial"
             parent="hr_holidays.menu_hr_holidays_root"

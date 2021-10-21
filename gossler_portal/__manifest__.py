@@ -27,11 +27,8 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/get_apps.xml',
-        'views/team_list.xml',
-        'views/personal_info.xml',
-        'views/get_notifications.xml',
         'views/side_bar_static.xml',
+        'views/content.xml',
     ],
     "qweb": [
         "static/src/xml/*.xml",

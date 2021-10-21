@@ -5,7 +5,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
-        <a href="#"><small>beta</small></a>
+        <a href="#"></a>
         <div id="close-sidebar" onclick="clears()">
           <i class="fa fa-times"></i>
         </div>
@@ -33,7 +33,6 @@
               <a href="/web#action=107">
                 <i class="fa fa-book"></i>
                 <span>Ingresar al portal</span>
-                <span class="badge badge-pill badge-primary">APPS</span>
               </a>
             </li>
 
@@ -49,7 +48,6 @@
             <a href="#">
               <i class="fa fa-book"></i>
               <span>Documentacion</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
             </a>
           </li>
           <li>

@@ -1,0 +1,332 @@
+<odoo>
+    <data>
+        <!-- AUSENCIAS -->
+        <template id="mostrar_ausencias">
+          <div id="card" class="weater">
+  					<div class="city-selected">
+  						<article>
+  							<div class="info">
+  								<div class="night">Vacaciones</div>
+  							</div>
+  							<div class="icon">
+                  <img style="filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(145deg) brightness(98%) contrast(103%);" src="/gossler_portal/static/src/svg/user-cog-solid.svg"/>
+  							</div>
+  						</article>
+  					</div>
+  					<div class="days">
+  						<div class="row row-no-gutter">
+                <a class="hiper col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4" href="/ausencias">
+  								<div class="day">
+  									<h1 class="how-get">Guía</h1>
+  								</div>
+                </a>
+                <a class="hiper col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4" href="/web#action=155">
+  								<div class="day">
+  									<h1>Solicitar</h1>
+  								</div>
+                </a>
+  							<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+  								<div class="day">
+  									<h1>Disponibles</h1>
+                    <t t-esc="request.env.user.employee_id.remaining_leaves"/>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+        </template>
+
+        <!-- PANEL APLICACIONES -->
+        <template id="apps_lists">
+          <div class="apps_view">
+              <t t-foreach="request.env['ir.ui.menu'].search([])" t-as="line">
+                <t t-foreach="line.groups_id" t-as="groups">
+                  <t t-if="groups.id==1">
+                      <a class="o_app-portal" t-att-href="'/web#menu_id=%s&amp;action=' % (line.id)">
+                          <img class="o-app-icon-portal" t-attf-src="data:image/png;base64,#{line.web_icon_data}"/>
+                          <span class="o-app-name">
+                            <t t-esc="line.name"/>
+                          </span>
+                      </a>
+                  </t>
+                </t>
+              </t>
+          </div>
+        </template>
+
+        <!-- DROPDOWN APLICACIONES -->
+        <template id="apps_lists_drop">
+          <div class="apps_view">
+              <t t-foreach="request.env['ir.ui.menu'].search([])" t-as="line">
+                <t t-foreach="line.groups_id" t-as="groups">
+                  <t t-if="groups.id==1">
+                    <li>
+                      <a class="o_app-portal" t-att-href="'/web#menu_id=%s&amp;action=' % (line.id)">
+                        <img class="o-app-icon-portal-mini" t-attf-src="data:image/png;base64,#{line.web_icon_data}"/>
+                        <span class="pull-mini"><t t-esc="line.name"/></span>
+                      </a>
+                    </li>
+                  </t>
+                </t>
+              </t>
+          </div>
+        </template>
+
+        <!-- INFORMACION EMPLEADO -->
+        <template id="personal_info">
+          <div class="profile-sidebar">
+            <table class="table table-striped">
+              <thead>
+                </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="">
+                        <font style="color: rgb(0, 49, 99); font-size: 12px;">Correo</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.work_email"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="">
+                       <font style="color: rgb(0, 49, 99); font-size: 12px;">Departamento</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.department_id.name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="">
+                        <font style="color: rgb(0, 49, 99); font-size: 12px;">Gerente</font>
+                      </th>
+                      <td>
+                        <span t-esc="request.env.user.employee_id.coach_id.name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                           <font style="color: rgb(0, 49, 99); font-size: 12px;">Pin Impresora </font>
+                      </th>
+                      <td>
+                        <span  t-esc="request.env.user.employee_id.x_pin_impresora"/>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </template>
+
+        <!-- CHECKLIST EMPLEADO -->
+        <template id="checklist">
+          <div class="row">
+            <div class="col-6">
+              <h6>Checklist de ingreso</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.entry_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="request.env.user.employee_id.entry_progress"/>%</div>
+              </div><br/>
+              <t t-foreach="request.env['employee.checklist'].search([('document_type','=','entry')])" t-as="lines">
+                <div class="form-check" >
+                  <t t-foreach="request.env.user.employee_id.entry_checklist" t-as="line">
+                    <t t-if="lines.id == line.id">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
+                    </t>
+                    <t t-else="">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
+                    </t>
+                  </t>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <t t-esc="lines.name"/>
+                  </label>
+                </div>
+              </t>
+            </div>
+            <div class="col-6">
+              <h6>Checklist de salida</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.exit_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="request.env.user.employee_id.exit_progress"/>%</div>
+              </div><br/>
+              <t t-foreach="request.env['employee.checklist'].search([('document_type','=','exit')])" t-as="lines">
+                <div class="form-check" >
+                  <t t-foreach="request.env.user.employee_id.exit_checklist" t-as="line">
+                    <t t-if="lines.id == line.id">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
+                    </t>
+                    <t t-else="">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
+                    </t>
+                  </t>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <t t-esc="lines.name"/>
+                  </label>
+                </div>
+              </t>
+            </div>
+          </div>
+        </template>
+
+        <!-- EQUIPO DE EMPLEADO -->
+        <template id="team_list">
+          <h6>Equipo <t t-esc="request.env.user.department_id.name"/></h6>
+            <div class="graybar">
+              <t t-if="len(request.env.user.department_id.member_ids) &lt; 5">
+                <t t-foreach="request.env.user.department_id.member_ids" t-as="line">
+                  <div class="table1">
+                    <div class="row1 fixed">
+                      <img class="rounded-circle d-block  organigram-photo" t-attf-src="data:image/*;base64,{{line.image_128}}"/>
+                    </div>
+                    <div class="row1 fluid">
+                      <div clow="row">
+                        <div class="col-12 text-small">
+                          <strong><t t-esc="line.name"/>
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </t>
+              </t>
+              <t t-else="">
+                <div class="row">
+                  <t t-foreach="request.env.user.department_id.member_ids" t-as="line">
+                    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                      <img data-toggle="tooltip" t-attf-title="{{line.name}}" data-placement="bottom" class="rounded-circle d-block  organigram-photo" t-attf-src="data:image/*;base64,{{line.image_128}}"/>
+                    </div>
+                  </t>
+                </div>
+              </t>
+            </div>
+        </template>
+
+        <!-- SIDEBAR INFO -->
+        <template id="side_bar_user_info">
+          <div class="profile-userpic">
+              <t t-if="request.env.user.employee_id.parent_id.name">
+                 <img class="rounded-circle d-block mx-auto profile-logo" t-attf-src="data:image/*;base64,{{request.env.user.employee_id.image_256}}"/>
+              </t>
+          </div>
+          <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+               <p class="name-field" t-field="user_id.partner_id"/>
+            </div>
+            <div class="profile-usertitle-job">
+              <t t-if="request.env.user.employee_id.job_id.name">
+                <p class="o_default_snippet_text">
+                  <span t-esc="request.env.user.employee_id.job_id.name"/>
+                </p>
+              </t>
+            </div>
+          </div>
+        </template>
+
+        <!-- REWARDS -->
+        <template id="get_rewards">
+          <t t-if="request.env.user.employee_id.badge_ids">
+            <div class="col-md-12">
+              <div class="row">
+                <t t-set="counter" t-value="0"/>
+                <t t-foreach="request.env.user.employee_id.badge_ids" t-as="line">
+                  <t t-if="counter &lt; 3">
+                    <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                      <a data-toggle="tooltip" t-attf-title="{{line.badge_id.name}}" data-placement="bottom" t-attf-onclick="exampleOnclick('{{line.display_name}}','{{line.comment}}','{{line.level}}','{{line.sender_id.name}}','{{line.write_date}}','{{line.badge_id.description}}','{{line.badge_id.image_1920}}')">
+                        <img class="img-reward" t-attf-src="data:image/*;base64,{{line.badge_id.image_1920}}"/>
+                      </a>
+                    </div>
+                  </t>
+                  <t t-set="counter" t-value="counter + 1"/>
+                </t>
+                <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3" >
+                  <a data-toggle="modal" t-attf-data-target="#modalplus" data-placement="bottom" t-attf-title="ver todos">
+                    <div class="circle_container">
+                      <div class="circle_main">
+                        <div class="circle_text_container">
+                          <div class = "circle_text">
+                            +
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </t>
+        </template>
+
+        <!-- MODAL REWARDS -->
+        <template id="modal_reward">
+          <div class="modal fade bd-example-modal-lg" t-attf-id="modalplus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Logros</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">
+                      <i class="fa fa-times"/>
+                    </span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="card-columns">
+                    <t t-foreach="request.env.user.employee_id.badge_ids" t-as="line">
+                      <t t-if="line.badge_id.image_1920">
+                        <div class="card p-1">
+                          <div class="d-flex justify-content-center">
+                            <img class="card-img-top resize-50" t-attf-src="data:image/*;base64,{{line.badge_id.image_1920}}"/>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title"><t t-esc="line.badge_id.name" /></h5>
+                            <p class="card-text"><t t-esc="line.comment" /></p>
+                            <p class="card-text"><t t-esc="line.badge_id.description" /></p>
+                            <p class="card-text">Otorgada por <t t-esc="line.sender_id.name" /></p>
+                            <p class="card-text">Insignia de nivel <t t-esc="line.level" t-lang="esp" /></p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted"><t t-esc="line.write_date" /></small>
+                          </div>
+                        </div>
+                      </t>
+                    </t>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- MOSTRAR NOTIFICACIONES -->
+        <template id="get_notifications">
+          <div class="container s_allow_columns">
+            <div class="row">
+              <t t-if="request.env.user.employee_id.activity_ids">
+                <t t-foreach="request.env.user.employee_id.activity_ids" t-as="line">
+                  <div class="o_colored_level col-lg-12">
+                    <div class="s_card card bg-white w-100" data-snippet="s_card" data-name="Card">
+                      <h6 class="card-header o_default_snippet_text">
+                        <i t-attf-class="fa fa-1x {{line.icon}} mr8"/><t t-esc="line.display_name"/>
+                      </h6>
+                      <div class="card-body">
+                        <t t-raw="line.note"/>
+                        Actividad creada por <t t-esc="line.create_uid.name"/>
+                      </div>
+                      <div class="card-footer o_default_snippet_text">
+                        <i class="fa fa-1x fa-clock-o mr8"/>
+                        <t t-if="line.state == 'planned'">PLANEADO PARA <t t-esc="line.date_deadline"/></t>
+                        <t t-elif="line.state == 'overdue'">VENCIDO <t t-esc="line.date_deadline"/> | CONTACTESE CON EL CREADOR DE LA ACTIVIDAD</t>
+                        <t t-elif="line.state == 'today'">HOY VENCE</t>
+                      </div>
+                    </div>
+                  </div>
+                </t>
+              </t>
+              <t t-else="">
+                <div class="o_colored_level col-lg-12">
+                  <div class="alert alert-success" role="alert">
+                    Todo en orden
+                  </div>
+                </div>
+              </t>
+            </div>
+          </div>
+        </template>
+    </data>
+</odoo>
