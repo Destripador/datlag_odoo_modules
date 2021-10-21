@@ -30,7 +30,7 @@
                     <a class="nav-link" id="nav_tabs_link_1620942661576_8" data-toggle="tab" href="#nav_tabs_content_1620942661576_8" role="tab" aria-controls="nav_tabs_content_1620942661576_8" aria-selected="false" data-original-title="" title="">
                       Pendientes
                       <t t-if="request.env.user.employee_id.activity_ids">
-                        <span t-attf-class="badge badge-pill badge-danger" t-esc="len(request.env.user.employee_id.activity_ids)" />
+                        <span t-attf-class="badge badge-pill badge-danger" t-esc="len(request.env.user.employee_id.message_ids)+len(request.env.user.employee_id.activity_ids)" />
                       </t>
                     </a>
                   </li>
