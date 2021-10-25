@@ -119,48 +119,54 @@
         <!-- CHECKLIST EMPLEADO -->
         <template id="checklist">
           <div class="row">
-            <div class="col-6">
-              <h6>Checklist de ingreso</h6>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.entry_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="request.env.user.employee_id.entry_progress"/>%</div>
-              </div><br/>
-              <t t-foreach="request.env['employee.checklist'].search([('document_type','=','entry')])" t-as="lines">
-                <div class="form-check" >
-                  <t t-foreach="request.env.user.employee_id.entry_checklist" t-as="line">
-                    <t t-if="lines.id == line.id">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
-                    </t>
-                    <t t-else="">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
-                    </t>
+            <t t-if="request.env.user.employee_id.active == True">
+              <div class="col-12">
+                <h6>Checklist de ingreso</h6>
+                <div class="progress">
+                <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.entry_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="int(request.env.user.employee_id.entry_progress)"/>%</div>
+                </div><br/>
+                <t t-if="request.env.user.employee_id.entry_progress  &lt; 100">
+                  <t t-value="request.env.user.employee_id.entry_checklist.ids" t-set="kokitos"/>
+                  <t t-foreach="request.env['employee.checklist'].search([('document_type','=','entry')])" t-as="lines">
+                    <div class="form-check" >
+                      <t t-if="lines.id in kokitos">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
+                      </t>
+                      <t t-else="">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
+                      </t>
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <t t-esc="lines.name"/>
+                        <t t-set=""/>
+                      </label>
+                    </div>
                   </t>
-                  <label class="form-check-label" for="flexCheckDefault">
-                    <t t-esc="lines.name"/>
-                  </label>
-                </div>
-              </t>
-            </div>
-            <div class="col-6">
-              <h6>Checklist de salida</h6>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.exit_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="request.env.user.employee_id.exit_progress"/>%</div>
-              </div><br/>
-              <t t-foreach="request.env['employee.checklist'].search([('document_type','=','exit')])" t-as="lines">
-                <div class="form-check" >
-                  <t t-foreach="request.env.user.employee_id.exit_checklist" t-as="line">
-                    <t t-if="lines.id == line.id">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
+                </t>
+              </div>
+            </t>
+            <t t-else="">
+              <div class="col-12">
+                <h6>Checklist de salida</h6>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" t-attf-style="width: {{request.env.user.employee_id.exit_progress}}%;" t-attf-aria-valuenow="{{request.env.user.employee_id.exit_progress}}" aria-valuemin="0" aria-valuemax="100"><t t-esc="request.env.user.employee_id.exit_progress"/>%</div>
+                </div><br/>
+                <t t-foreach="request.env['employee.checklist'].search([('document_type','=','exit')])" t-as="lines">
+                  <div class="form-check" >
+                    <t t-foreach="request.env.user.employee_id.exit_checklist" t-as="line">
+                      <t t-if="lines.id == line.id">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="checked" onclick="return false;" />
+                      </t>
+                      <t t-else="">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
+                      </t>
                     </t>
-                    <t t-else="">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="return false;"/>
-                    </t>
-                  </t>
-                  <label class="form-check-label" for="flexCheckDefault">
-                    <t t-esc="lines.name"/>
-                  </label>
-                </div>
-              </t>
-            </div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <t t-esc="lines.name"/>
+                    </label>
+                  </div>
+                </t>
+              </div>
+            </t>
           </div>
         </template>
 
